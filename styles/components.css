@@ -1,10 +1,29 @@
 /* Shared components */
-.divider { height: 0.5px; background: var(--border); margin: 1.5rem 0; }
-.section-title { font-size: 12px; font-weight: 500; color: var(--text2); letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 1rem; }
+.divider { height: 0.5px; background: var(--border); margin: var(--sp-2xl) 0; }
+.section-title {
+  font-size: var(--fs-base);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-tight);
+  color: var(--text2);
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-bottom: var(--sp-lg);
+}
 
 /* Shared filter pills */
 .tl-filter,
-.ps-filter { background: var(--gray-bg); border: 0.5px solid var(--border); color: var(--text2); padding: 5px 12px; border-radius: 20px; font-size: 12px; cursor: pointer; transition: all .15s; }
+.ps-filter {
+  background: var(--gray-bg);
+  border: 0.5px solid var(--border);
+  color: var(--text2);
+  padding: 5px var(--sp-md);
+  border-radius: 20px;
+  font-size: var(--fs-base);
+  font-weight: var(--fw-normal);
+  line-height: var(--lh-tight);
+  cursor: pointer;
+  transition: all .15s;
+}
 .tl-filter:hover,
 .ps-filter:hover { border-color: var(--border2); color: var(--text); }
 .tl-filter.active,
@@ -16,7 +35,22 @@
 .clan-mode-btn,
 .mech-mode-btn,
 .tl-mode-btn,
-.tl3-mode-btn { padding: 7px 16px; border-radius: var(--r2); border: 0.5px solid var(--border); background: var(--bg2); color: var(--text2); font-size: 12px; cursor: pointer; transition: all .15s; }
+.tl3-mode-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-xs);
+  padding: var(--sp-sm) var(--sp-lg);
+  border-radius: var(--r2);
+  border: 0.5px solid var(--border);
+  background: var(--bg2);
+  color: var(--text2);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-tight);
+  cursor: pointer;
+  transition: all .15s;
+}
 .hier-toggle-btn.active,
 .flow-mode-btn.active,
 .clan-mode-btn.active,
