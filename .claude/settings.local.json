@@ -10,7 +10,8 @@
       "Bash(wc -c /Users/alexanderlopatin/Desktop/PS/styles/*.css)",
       "Bash(grep \"@media\" /Users/alexanderlopatin/Desktop/PS/styles/*.css)",
       "Bash(grep -c \"setHTML\\\\|innerHTML\" /Users/alexanderlopatin/Desktop/PS/js/**/*.js)",
-      "Bash(grep \"innerHTML\\\\|querySelector\\\\|getElementById\" /Users/alexanderlopatin/Desktop/PS/js/features/*.js)"
+      "Bash(grep \"innerHTML\\\\|querySelector\\\\|getElementById\" /Users/alexanderlopatin/Desktop/PS/js/features/*.js)",
+      "Bash(python3 -c \":*)"
     ]
   }
 }
