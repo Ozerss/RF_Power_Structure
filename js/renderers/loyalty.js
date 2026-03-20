@@ -30,10 +30,11 @@ function buildTrapSvg({ mechs }) {
     rent: { color: "var(--amber)", opacity: 0.78 },
     normalization: { color: "var(--green)", opacity: 0.85 },
   };
+  const mechMap = Object.fromEntries(mechs.map((mech) => [mech.id, mech]));
 
   let svg = `<svg width="100%" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">`;
   LAYERS.forEach((layer) => {
-    svg += `<g class="trap-node-g" data-mech="${layer.id}">`;
+    svg += `<g class="trap-node-g" data-mech="${layer.id}" tabindex="0" role="button" aria-label="${mechMap[layer.id]?.name || layer.id}">`;
     svg += `<circle cx="${CX}" cy="${CY}" r="${layer.r}" fill="${FILL[layer.id].color}" opacity="${FILL[layer.id].opacity}" stroke="${SOLID[layer.id]}" stroke-width="0.5" class="trap-ring-fill"/>`;
     svg += `</g>`;
   });
@@ -64,7 +65,7 @@ function buildTrapSvg({ mechs }) {
     const pct = intensities[id];
     const maxBarW = 130;
     const barW = Math.round((pct / 100) * maxBarW);
-    svg += `<g class="trap-node-g" data-mech="${id}">`;
+    svg += `<g class="trap-node-g" data-mech="${id}" tabindex="0" role="button" aria-label="${mechMap[id]?.name || id}">`;
     svg += `<rect x="${PX}" y="${y}" width="10" height="10" rx="2" fill="${color}" opacity="0.9"/>`;
     svg += `<text x="${PX + 14}" y="${y + 9}" fill="${color}" font-size="10" font-family="sans-serif">${mechLabels[id]}</text>`;
     svg += `<rect x="${PX}" y="${y + 14}" width="${maxBarW}" height="6" rx="3" fill="var(--border)"/>`;
@@ -84,6 +85,7 @@ export function renderLoyaltyDetail(id, { mechs }) {
   }
 
   return `<div class="trap-detail active">
+    <button class="detail-close" aria-label="Закрыть">×</button>
     <div class="trap-detail-header">
       <div class="trap-detail-icon" style="background:${mech.bg}">${mech.icon}</div>
       <div class="trap-detail-body">
@@ -134,7 +136,7 @@ function renderRoles({ roles, mechs }) {
   let html = '<div class="trap-intro">Один и тот же механизм давит на разных людей по-разному. Нажмите на роль чтобы увидеть как ловушка закрывается для каждого.</div>';
   html += '<div class="roles-grid">';
   roles.forEach((role) => {
-    html += `<div class="role-card" data-role-card="${role.id}">
+    html += `<div class="role-card" data-role-card="${role.id}" tabindex="0" role="button" aria-expanded="false" aria-label="${role.name}">
       <div class="rc-head">
         <div class="rc-av" style="background:${role.bg}">${role.icon}</div>
         <div><div class="rc-name" style="color:${role.color}">${role.name}</div><div class="rc-sub">${role.sub}</div></div>
@@ -170,7 +172,7 @@ function renderCases({ cases, mechs }) {
   let html = '<div class="trap-intro">Реальные задокументированные случаи — каждый иллюстрирует конкретную комбинацию механизмов.</div>';
   html += '<div class="cases-list">';
   cases.forEach((item, index) => {
-    html += `<div class="case-item">
+    html += `<div class="case-item" tabindex="0" role="button" aria-expanded="false" aria-label="${item.title}">
       <div class="ci-head">
         <div class="ci-num">${String(index + 1).padStart(2, "0")}</div>
         <div class="ci-title">${item.title}</div>
@@ -199,7 +201,7 @@ export function renderLoyaltySection({ mode, selMech, mechs, roles, cases }) {
       ? `
         <div class="trap-intro trap-intro--tight">Каждое кольцо — отдельный механизм удержания. Чем ближе к центру — тем более «мягкий» и незаметный. Чем дальше — тем более жёсткий. Нажмите на кольцо или на механизм в легенде.</div>
         <div class="trap-svg-wrap">${buildTrapSvg({ mechs })}</div>
-        <div id="mech-detail-out">${renderLoyaltyDetail(selMech, { mechs })}</div>`
+        <div id="mech-detail-out" role="region" aria-live="polite" aria-label="Подробности">${renderLoyaltyDetail(selMech, { mechs })}</div>`
       : mode === "roles"
         ? renderRoles({ roles, mechs })
         : renderCases({ cases, mechs });
@@ -216,11 +218,11 @@ export function renderLoyaltySection({ mode, selMech, mechs, roles, cases }) {
         <button class="mech-mode-btn${mode === "cases" ? " active" : ""}" data-mode="cases">Кейсы</button>
       </div>
     </div>
-    <div class="flow-stats">
-      <div class="hier-stat"><div class="hier-stat-num hier-stat-num--amber">7</div><div class="hier-stat-label">механизмов удержания</div></div>
-      <div class="hier-stat"><div class="hier-stat-num hier-stat-num--red">98%</div><div class="hier-stat-label">интенсивность войны как замка</div></div>
-      <div class="hier-stat"><div class="hier-stat-num hier-stat-num--purple">0</div><div class="hier-stat-label">явных угроз — всё работает автоматически</div></div>
-      <div class="hier-stat"><div class="hier-stat-num hier-stat-num--green">1</div><div class="hier-stat-label">случай открытого бунта за 25 лет (Пригожин)</div></div>
+    <div class="stat-grid">
+      <div class="stat-card stat-card--compact"><div class="stat-num stat-num--amber">7</div><div class="stat-label">механизмов удержания</div></div>
+      <div class="stat-card stat-card--compact"><div class="stat-num stat-num--red">98%</div><div class="stat-label">интенсивность войны как замка</div></div>
+      <div class="stat-card stat-card--compact"><div class="stat-num stat-num--purple">0</div><div class="stat-label">явных угроз — всё работает автоматически</div></div>
+      <div class="stat-card stat-card--compact"><div class="stat-num stat-num--green">1</div><div class="stat-label">случай открытого бунта за 25 лет (Пригожин)</div></div>
     </div>
     <div id="mech-mode-area">${modeContent}</div>`;
 }

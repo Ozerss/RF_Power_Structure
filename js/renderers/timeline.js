@@ -6,6 +6,7 @@ export function renderTimelineDetail(event, idx, totalFiltered, CATS) {
   if (!event) return `<div class="tl3-detail"><div class="tl3-detail-hint">Нажмите на точку для подробностей</div></div>`;
   const color = catColor(CATS, event.cat);
   return `<div class="tl3-detail tl3-detail-active tl3-detail--accent" style="--tl3-accent:${color};--tl3-accent-bg:${color}15;--tl3-accent-border:${color}44;--tl3-accent-soft:${color}cc">
+    <button class="detail-close" aria-label="Закрыть">×</button>
     <div class="tl3-detail-top">
       <div class="tl3-detail-year">${event.y}</div>
       <div class="tl3-detail-content">
@@ -101,7 +102,7 @@ function buildCards({ filtered, openCards, CATS }) {
       { length: 10 },
       (_, dotIndex) => `<div class="tl3-imp-dot" style="background:${dotIndex < event.impact ? color : "var(--border)"}"></div>`
     ).join("");
-    html += `<div class="tl3-card${isOpen ? " tl3-card-open" : ""}" data-ci="${index}" style="border-left-color:${color}">
+    html += `<div class="tl3-card${isOpen ? " tl3-card-open" : ""}" data-ci="${index}" tabindex="0" role="button" aria-expanded="${isOpen ? "true" : "false"}" aria-label="${event.title}" style="border-left-color:${color}">
       <div class="tl3-card-head">
         <div class="tl3-card-year" style="color:${color}">${event.y}</div>
         <div class="tl3-card-title">${event.title}</div>
@@ -133,11 +134,11 @@ export function renderTimelineSection({ mode, selIdx, activeCat, openCards, CATS
       </div>
     </div>
 
-    <div class="tl3-stats-grid">
-      <div class="hier-stat hier-stat--compact"><div class="hier-stat-num hier-stat-num--amber">${events.length}</div><div class="hier-stat-label">ключевых событий</div></div>
-      <div class="hier-stat hier-stat--compact"><div class="hier-stat-num hier-stat-num--red">${critCount}</div><div class="hier-stat-label">критических (9–10/10)</div></div>
-      <div class="hier-stat hier-stat--compact"><div class="hier-stat-num hier-stat-num--green">${ERAS.length}</div><div class="hier-stat-label">исторических эпох</div></div>
-      <div class="hier-stat hier-stat--compact"><div class="hier-stat-num hier-stat-num--purple">27</div><div class="hier-stat-label">лет консолидации</div></div>
+    <div class="stat-grid">
+      <div class="stat-card stat-card--compact"><div class="stat-num stat-num--amber">${events.length}</div><div class="stat-label">ключевых событий</div></div>
+      <div class="stat-card stat-card--compact"><div class="stat-num stat-num--red">${critCount}</div><div class="stat-label">критических (9–10/10)</div></div>
+      <div class="stat-card stat-card--compact"><div class="stat-num stat-num--green">${ERAS.length}</div><div class="stat-label">исторических эпох</div></div>
+      <div class="stat-card stat-card--compact"><div class="stat-num stat-num--purple">27</div><div class="stat-label">лет консолидации</div></div>
     </div>
 
     <div class="tl3-cat-row">
@@ -159,7 +160,7 @@ export function renderTimelineSection({ mode, selIdx, activeCat, openCards, CATS
       ? `
       <div class="tl3-rail-hint">← прокрутите горизонтально · нажмите на точку для подробностей</div>
       ${buildRail({ filtered, selIdx, CATS, ERAS })}
-      <div id="tl3-detail-area">${detailHtml}</div>
+      <div id="tl3-detail-area" role="region" aria-live="polite" aria-label="Подробности">${detailHtml}</div>
     `
       : buildCards({ filtered, openCards, CATS })}
   `;

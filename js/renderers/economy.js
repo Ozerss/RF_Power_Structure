@@ -3,10 +3,10 @@ export function renderEconomySection({ stats, econCards }) {
     <div class="econ-section-title"><span>📊</span> Цифры которые объясняют всё</div>
     <div class="econ-grid">`;
   stats.forEach((stat) => {
-    html += `<div class="econ-stat">
-      <div class="econ-stat-num" style="color:${stat.color}">${stat.num}</div>
-      <div class="econ-stat-label">${stat.label}</div>
-      <div class="econ-stat-sub">${stat.sub}</div>
+    html += `<div class="stat-card">
+      <div class="stat-num" style="color:${stat.color}">${stat.num}</div>
+      <div class="stat-label">${stat.label}</div>
+      <div class="stat-sub">${stat.sub}</div>
     </div>`;
   });
   html += `</div></div>`;

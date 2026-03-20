@@ -85,7 +85,7 @@ function buildHierarchySvg({ CC, TC, nodes }) {
     const baseline = sin < -0.35 ? "auto" : sin > 0.35 ? "hanging" : "central";
 
     if (node.ring === 0) {
-      svg += `<g class="hier-node-g" data-id="${node.id}">`;
+      svg += `<g class="hier-node-g" data-id="${node.id}" tabindex="0" role="button" aria-label="${node.name}">`;
       svg += `<circle cx="${CX}" cy="${CY}" r="38" fill="${color}" opacity="0.12"/>`;
       svg += `<circle cx="${CX}" cy="${CY}" r="32" fill="${color}" opacity="0.9" stroke="${color}" stroke-width="1.5" class="hier-nc"/>`;
       svg += `<text x="${CX}" y="${CY}" text-anchor="middle" dominant-baseline="central" class="hier-node-abbr-svg" font-size="11" font-weight="600">${node.abbr}</text>`;
@@ -94,7 +94,7 @@ function buildHierarchySvg({ CC, TC, nodes }) {
       return;
     }
 
-    svg += `<g class="hier-node-g" data-id="${node.id}">`;
+    svg += `<g class="hier-node-g" data-id="${node.id}" tabindex="0" role="button" aria-label="${node.name}">`;
     svg += `<circle cx="${node.x.toFixed(1)}" cy="${node.y.toFixed(1)}" r="${radius}" fill="${color}" opacity="0.85" stroke="${color}" stroke-width="0.5" class="hier-nc"/>`;
     svg += `<text x="${node.x.toFixed(1)}" y="${node.y.toFixed(1)}" text-anchor="middle" dominant-baseline="central" class="hier-node-abbr-svg" font-size="${node.ring <= 2 ? 9 : 8}" font-weight="500">${node.abbr}</text>`;
 
@@ -142,11 +142,15 @@ function buildFormalHierarchy({ CC, CLAN_BG, TC, nodes }) {
 }
 
 export function renderHierarchyDetail(node, { CC, CLAN_BG, TC }) {
+  if (!node) {
+    return '<div class="hier-detail-hint">Нажмите на любой узел чтобы увидеть подробную информацию о роли, функции и уязвимостях</div>';
+  }
   const color = CC[node.clan];
   const bg = CLAN_BG[node.clan];
   const traj = TC[node.traj];
   const influence = Math.round(node.influence);
-  return `<div class="hier-detail-top">
+  return `<button class="detail-close" aria-label="Закрыть">×</button>
+  <div class="hier-detail-top">
     <div class="hier-detail-av" style="background:${bg};color:${color}">${node.abbr}</div>
     <div class="hier-detail-main">
       <div class="hier-detail-name" style="color:${color}">${node.name}</div>
@@ -185,11 +189,11 @@ export function renderHierarchySection(data) {
         <button class="hier-toggle-btn" id="btn-formal">Формальная вертикаль</button>
       </div>
     </div>
-    <div class="hier-stats">
-      <div class="hier-stat"><div class="hier-stat-num hier-stat-num--amber">25</div><div class="hier-stat-label">ключевых игроков в карте</div></div>
-      <div class="hier-stat"><div class="hier-stat-num hier-stat-num--purple">4</div><div class="hier-stat-label">кольца удалённости от Путина</div></div>
-      <div class="hier-stat"><div class="hier-stat-num hier-stat-num--green">6</div><div class="hier-stat-label">игроков с растущим влиянием</div></div>
-      <div class="hier-stat"><div class="hier-stat-num hier-stat-num--red">5</div><div class="hier-stat-label">игроков теряют позиции</div></div>
+    <div class="stat-grid">
+      <div class="stat-card stat-card--compact"><div class="stat-num stat-num--amber">25</div><div class="stat-label">ключевых игроков в карте</div></div>
+      <div class="stat-card stat-card--compact"><div class="stat-num stat-num--purple">4</div><div class="stat-label">кольца удалённости от Путина</div></div>
+      <div class="stat-card stat-card--compact"><div class="stat-num stat-num--green">6</div><div class="stat-label">игроков с растущим влиянием</div></div>
+      <div class="stat-card stat-card--compact"><div class="stat-num stat-num--red">5</div><div class="stat-label">игроков теряют позиции</div></div>
     </div>
     <div class="hier-legend hier-legend--tight">
       ${clanEntries.map((entry) => `<div class="hier-leg-item"><div class="hier-leg-dot" style="background:${CC[entry.key]}"></div>${entry.label}</div>`).join("")}
@@ -204,7 +208,7 @@ export function renderHierarchySection(data) {
       <div class="hier-svg-wrap">${buildHierarchySvg({ CC, TC, nodes })}</div>
     </div>
     <div class="hier-formal" id="hier-formal-wrap">${buildFormalHierarchy({ CC, CLAN_BG, TC, nodes })}</div>
-    <div class="hier-detail" id="hier-detail-panel">
+    <div class="hier-detail" id="hier-detail-panel" role="region" aria-live="polite" aria-label="Подробности">
       <div class="hier-detail-hint">Нажмите на любой узел чтобы увидеть подробную информацию о роли, функции и уязвимостях</div>
     </div>`;
 }

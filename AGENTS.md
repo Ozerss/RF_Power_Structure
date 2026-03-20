@@ -10,7 +10,7 @@ Current architecture:
 - `styles/base.css` — design tokens (colors, typography, spacing)
 - `styles/layout.css` — header, tabs, panels, basic mobile breakpoint
 - `styles/components.css` — shared UI: section titles, filter pills, mode toggles
-- `styles/sections.css` — per-section styles (~61KB), one `@media (max-width: 640px)` block at the end
+- `styles/sections.css` — per-section styles, unified `.stat-*` card family, `@media (max-width: 640px)` block at the end
 - `js/app.js` — ES module entry point (top-level await)
 - `js/state.js` — data loading and shared state
 - `js/dom.js`, `js/utils.js`, `js/search.js`, `js/filters.js`, `js/modals.js`, `js/tabs.js` — shared helpers
@@ -43,7 +43,11 @@ Dev server config: `.claude/launch.json` (name: "Dev Server", port 8080).
 8. **Dark/light theme toggle** — `[data-theme="light"]` block in `base.css` with full color variable overrides. Toggle button `#theme-toggle` in header. `js/theme.js` module handles switching + localStorage persistence. FOUC-prevention inline script in `<head>`.
 9. **Inline styles extraction** — 240→86 `style=` across all 10 renderers. All remaining 86 are data-driven (dynamic colors, positions, widths). Zero hardcoded hex/rgba left in renderers. ~70 new CSS classes added to `sections.css`.
 
-Steps 1–6: CSS-only. Steps 7–9: CSS + minimal HTML/JS (theme toggle button, theme.js module).
+10. **SVG theme-aware** — verified visually: SVG diagrams already respond correctly to both themes after inline styles extraction. Structural colors use `var(--*)`, accent colors are data-driven and work on both backgrounds. No additional changes needed.
+11. **Card shell unification** — two stat card families (`.hier-stat` + `.econ-stat`) merged into single `.stat-grid / .stat-card / .stat-num / .stat-label / .stat-sub` family. All 8 renderers updated. Old classes removed.
+12. **Dead CSS cleanup** — 61 legacy `.tl-*` class names (99 selector lines) removed from `sections.css`. Timeline uses only `.tl3-*` classes. `#tl-main-container` preserved.
+
+Steps 1–6: CSS-only. Steps 7–12: CSS + JS renderers + minimal HTML (theme toggle).
 
 ## Theme system
 
@@ -52,11 +56,18 @@ Steps 1–6: CSS-only. Steps 7–9: CSS + minimal HTML/JS (theme toggle button, 
 - Color variables: `--amber`, `--red`, `--blue`, `--green`, `--purple` + `*-bg`, `*-border` variants. Neutrals: `--bg`, `--bg2`, `--bg3`, `--border`, `--border2`, `--text`, `--text2`, `--text3`, `--gray-bg`, `--gray-border`.
 - 86 remaining inline `style=` in renderers use data-driven colors (dynamic `${color}`, `${bg}`, etc.) — they do NOT respond to theme toggle. This is known and expected.
 
-## Reusable CSS classes from inline styles extraction
+## Reusable CSS classes
 
-These classes were created during batches 1–4 and should be reused, not duplicated:
-- `.hier-stat-num--amber`, `--red`, `--purple`, `--green` — colored stat numbers
-- `.hier-stat--compact` — compact stat card padding
+Unified stat card family (use instead of creating new card patterns):
+- `.stat-grid` — grid container for stat cards
+- `.stat-card` — card (padding 14px 16px, bg2, border)
+- `.stat-card--compact` — smaller variant (padding 10px 12px)
+- `.stat-num` — large number (font-size 22px, font-weight 600)
+- `.stat-num--amber`, `--red`, `--purple`, `--green` — colored variants
+- `.stat-label` — description text
+- `.stat-sub` — additional small text
+
+Layout/header classes from inline styles extraction:
 - `.hier-header`, `.flow-header` — flex space-between header layout
 - `.hier-subtitle`, `.flow-subtitle` — small subtitle (font-size:11px, color:var(--text3))
 - `.hier-section-title`, `.flow-section-title` — section-title with reduced margin
@@ -67,17 +78,24 @@ These classes were created during batches 1–4 and should be reused, not duplic
 
 ## Known technical debt (do not fix unless explicitly requested)
 
-- **Parallel class families** — `.tl-*` and `.tl3-*` coexist (two timeline implementations).
-- **Card shell duplication** — each section implements its own card/stat pattern (`.hier-stat`, `.flow-stats`, etc.).
-- **SVG not theme-aware** — SVG diagrams (hierarchy rings, clan graph, loyalty rings) use data-driven inline colors that don't switch with theme.
+- **86 data-driven inline styles** — remaining `style=` in renderers use dynamic values from data (`${color}`, `${bg}`, `width:${pct}%`). Cannot be extracted to CSS. They don't respond to theme toggle — this is known and accepted.
 - **No accessibility** — no ARIA roles, keyboard nav, focus styles.
 
-## Current priorities (in order)
+## Current state
 
-1. **SVG theme-aware rendering** — make SVG diagrams (hierarchy, clans, loyalty) respond to light/dark theme. Currently they use data-driven inline colors that stay the same in both themes.
-2. **Card shell unification** — deduplicate card/stat patterns across sections into shared classes.
-3. **Parallel class cleanup** — merge `.tl-*` / `.tl3-*` families where possible.
-4. **Content updates** — update/expand data in `data/*.json` files.
+All major technical cleanup is complete. The project is in a stable, maintainable state:
+- Modular architecture (data/styles/js split)
+- Unified design tokens (typography, spacing, colors)
+- Responsive (mobile 375px)
+- Dark/light theme
+- Clean CSS (no dead code, unified card patterns, no hardcoded colors)
+- 86 inline styles remaining (all data-driven, by design)
+
+Possible future directions (not started):
+- Content updates in `data/*.json`
+- Accessibility pass (ARIA, keyboard nav, focus styles)
+- Performance optimization
+- New sections or features
 
 ## Core rules
 
@@ -160,7 +178,7 @@ A task is done only if:
 
 When relevant, ask for or recommend checking:
 
-- Page loads through http://localhost:5500
+- Page loads through http://localhost:8080
 - No `Failed to fetch`, `404`, `SyntaxError`, missing export, or null DOM errors in console
 - Affected tabs, cards, filters, and renderers still work
 - Affected section still renders with real data

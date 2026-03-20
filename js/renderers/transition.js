@@ -6,10 +6,10 @@ export function renderTransitionSection({ scenarios, indicators, nextGen }) {
   html += `<div class="econ-section">
     <div class="econ-section-title"><span>📡</span> Состояние системы сейчас — 2025/2026</div>
     <div class="econ-grid">
-      <div class="econ-stat"><div class="econ-stat-num transit-stat--amber">2036</div><div class="econ-stat-label">год до которого Путин может оставаться легально</div><div class="econ-stat-sub">После конституционного обнуления 2020-го</div></div>
-      <div class="econ-stat"><div class="econ-stat-num transit-stat--red">73</div><div class="econ-stat-label">года Путину в 2026-м</div><div class="econ-stat-sub">Публичные признаки ухудшения здоровья фиксируются с 2021-го</div></div>
-      <div class="econ-stat"><div class="econ-stat-num transit-stat--green">75%</div><div class="econ-stat-label">Думы — новые лица на выборах 2026-го</div><div class="econ-stat-sub">Ветераны войны как новый политический класс (Carnegie, 2025)</div></div>
-      <div class="econ-stat"><div class="econ-stat-num transit-stat--purple">0</div><div class="econ-stat-label">официально назначенных преемников</div><div class="econ-stat-sub">Намеренная неопределённость как инструмент контроля</div></div>
+      <div class="stat-card"><div class="stat-num stat-num--amber">2036</div><div class="stat-label">год до которого Путин может оставаться легально</div><div class="stat-sub">После конституционного обнуления 2020-го</div></div>
+      <div class="stat-card"><div class="stat-num stat-num--red">73</div><div class="stat-label">года Путину в 2026-м</div><div class="stat-sub">Публичные признаки ухудшения здоровья фиксируются с 2021-го</div></div>
+      <div class="stat-card"><div class="stat-num stat-num--green">75%</div><div class="stat-label">Думы — новые лица на выборах 2026-го</div><div class="stat-sub">Ветераны войны как новый политический класс (Carnegie, 2025)</div></div>
+      <div class="stat-card"><div class="stat-num stat-num--purple">0</div><div class="stat-label">официально назначенных преемников</div><div class="stat-sub">Намеренная неопределённость как инструмент контроля</div></div>
     </div>
   </div>`;
   html += `<div class="econ-section"><div class="econ-section-title"><span>🗺</span> Четыре сценария транзита</div>`;

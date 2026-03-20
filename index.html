@@ -10,13 +10,25 @@
     document.documentElement.setAttribute('data-theme', t);
   })();
 </script>
-<title>Структура власти РФ</title>
+<title>Структура власти РФ — интерактивная аналитическая схема</title>
+<meta name="description" content="Как устроена власть в России: иерархия, кланы, механизмы лояльности, поток решений, экономика, пропаганда, транзит. Интерактивный аналитический гайд с данными на 2025 год.">
+<meta name="author" content="PS Research">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Структура власти РФ — интерактивная схема">
+<meta property="og:description" content="Кто реально управляет Россией, как принимаются решения и почему система устроена именно так. 10 интерактивных разделов с аналитикой.">
+<meta property="og:image" content="og-image.png">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Структура власти РФ">
+<meta name="twitter:description" content="Интерактивный аналитический гайд: иерархия, кланы, механизмы удержания, экономика власти. Данные на 2025 год.">
+<meta name="twitter:image" content="og-image.png">
 <link rel="stylesheet" href="styles/base.css">
 <link rel="stylesheet" href="styles/layout.css">
 <link rel="stylesheet" href="styles/components.css">
 <link rel="stylesheet" href="styles/sections.css">
 </head>
 <body>
+<a href="#main-content" class="skip-link">Перейти к содержимому</a>
 
 <header>
   <h1>Структура власти Российской Федерации</h1>
@@ -24,77 +36,79 @@
   <button id="theme-toggle" aria-label="Сменить тему">◐</button>
 </header>
 
-<div class="tabs">
-  <div class="tab active" data-tab="hierarchy">Иерархия</div>
-  <div class="tab" data-tab="flow">Поток решений</div>
-  <div class="tab" data-tab="clans">Кланы и сети</div>
-  <div class="tab" data-tab="mechanisms">Механизмы лояльности</div>
-  <div class="tab" data-tab="timeline">Таймлайн 1999–2024</div>
-  <div class="tab" data-tab="persons">Персоналии</div>
-  <div class="tab" data-tab="economics">Экономика власти</div>
-  <div class="tab" data-tab="propaganda">Пропаганда</div>
-  <div class="tab" data-tab="transit">Транзит власти</div>
-  <div class="tab" data-tab="conclusions">Выводы</div>
-</div>
+<nav class="tabs" role="tablist">
+  <div class="tab active" data-tab="hierarchy" role="tab" id="tab-hierarchy" tabindex="0" aria-selected="true" aria-controls="panel-hierarchy">Иерархия</div>
+  <div class="tab" data-tab="flow" role="tab" id="tab-flow" tabindex="-1" aria-selected="false" aria-controls="panel-flow">Поток решений</div>
+  <div class="tab" data-tab="clans" role="tab" id="tab-clans" tabindex="-1" aria-selected="false" aria-controls="panel-clans">Кланы и сети</div>
+  <div class="tab" data-tab="mechanisms" role="tab" id="tab-mechanisms" tabindex="-1" aria-selected="false" aria-controls="panel-mechanisms">Механизмы лояльности</div>
+  <div class="tab" data-tab="timeline" role="tab" id="tab-timeline" tabindex="-1" aria-selected="false" aria-controls="panel-timeline">Таймлайн 1999–2024</div>
+  <div class="tab" data-tab="persons" role="tab" id="tab-persons" tabindex="-1" aria-selected="false" aria-controls="panel-persons">Персоналии</div>
+  <div class="tab" data-tab="economics" role="tab" id="tab-economics" tabindex="-1" aria-selected="false" aria-controls="panel-economics">Экономика власти</div>
+  <div class="tab" data-tab="propaganda" role="tab" id="tab-propaganda" tabindex="-1" aria-selected="false" aria-controls="panel-propaganda">Пропаганда</div>
+  <div class="tab" data-tab="transit" role="tab" id="tab-transit" tabindex="-1" aria-selected="false" aria-controls="panel-transit">Транзит власти</div>
+  <div class="tab" data-tab="conclusions" role="tab" id="tab-conclusions" tabindex="-1" aria-selected="false" aria-controls="panel-conclusions">Выводы</div>
+</nav>
 
-<!-- HIERARCHY -->
-<div class="panel active" id="panel-hierarchy">
-  <div id="hier-container"></div>
-</div>
-
-<!-- FLOW -->
-<div class="panel" id="panel-flow">
-  <div id="flow-container"></div>
-</div>
-
-<!-- CLANS -->
-<div class="panel" id="panel-clans">
-  <div id="clan-container"></div>
-</div>
-
-<!-- MECHANISMS -->
-<div class="panel" id="panel-mechanisms">
-  <div id="mech-container"></div>
-</div>
-
-<!-- TIMELINE -->
-<div class="panel" id="panel-timeline">
-  <div id="tl-main-container"></div>
-</div>
-
-<!-- PERSONS -->
-<div class="panel" id="panel-persons">
-  <div class="section-title">Ключевые фигуры системы — 2025/2026</div>
-  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px" id="ps-filters"></div>
-  <div style="margin-bottom:1.25rem">
-    <input id="ps-search" type="text" placeholder="Поиск по имени или роли..." style="width:100%;max-width:380px;padding:8px 12px;background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--r);color:var(--text);font-size:13px">
+<main id="main-content">
+  <!-- HIERARCHY -->
+  <div class="panel active" id="panel-hierarchy" role="tabpanel" aria-labelledby="tab-hierarchy">
+    <div id="hier-container"></div>
   </div>
-  <div id="ps-grid"></div>
-</div>
 
-<!-- ECONOMICS -->
-<div class="panel" id="panel-economics">
-  <div class="section-title">Экономика власти — как деньги движутся через систему</div>
-  <div id="econ-content"></div>
-</div>
+  <!-- FLOW -->
+  <div class="panel" id="panel-flow" role="tabpanel" aria-labelledby="tab-flow">
+    <div id="flow-container"></div>
+  </div>
 
-<!-- PROPAGANDA -->
-<div class="panel" id="panel-propaganda">
-  <div class="section-title">Архитектура пропаганды — от Кремля до зрителя</div>
-  <div id="prop-content"></div>
-</div>
+  <!-- CLANS -->
+  <div class="panel" id="panel-clans" role="tabpanel" aria-labelledby="tab-clans">
+    <div id="clan-container"></div>
+  </div>
 
-<!-- TRANSIT -->
-<div class="panel" id="panel-transit">
-  <div class="section-title">Транзит власти — сценарии, триггеры, индикаторы</div>
-  <div id="transit-content"></div>
-</div>
+  <!-- MECHANISMS -->
+  <div class="panel" id="panel-mechanisms" role="tabpanel" aria-labelledby="tab-mechanisms">
+    <div id="mech-container"></div>
+  </div>
 
-<!-- CONCLUSIONS -->
-<div class="panel" id="panel-conclusions">
-  <div class="section-title">Итоговый анализ — всё что важно понять и помнить</div>
-  <div id="conclusions-content"></div>
-</div>
+  <!-- TIMELINE -->
+  <div class="panel" id="panel-timeline" role="tabpanel" aria-labelledby="tab-timeline">
+    <div id="tl-main-container"></div>
+  </div>
+
+  <!-- PERSONS -->
+  <div class="panel" id="panel-persons" role="tabpanel" aria-labelledby="tab-persons">
+    <div class="section-title">Ключевые фигуры системы — 2025/2026</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px" id="ps-filters"></div>
+    <div style="margin-bottom:1.25rem">
+      <input id="ps-search" type="text" placeholder="Поиск по имени или роли..." style="width:100%;max-width:380px;padding:8px 12px;background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--r);color:var(--text);font-size:13px">
+    </div>
+    <div id="ps-grid"></div>
+  </div>
+
+  <!-- ECONOMICS -->
+  <div class="panel" id="panel-economics" role="tabpanel" aria-labelledby="tab-economics">
+    <div class="section-title">Экономика власти — как деньги движутся через систему</div>
+    <div id="econ-content"></div>
+  </div>
+
+  <!-- PROPAGANDA -->
+  <div class="panel" id="panel-propaganda" role="tabpanel" aria-labelledby="tab-propaganda">
+    <div class="section-title">Архитектура пропаганды — от Кремля до зрителя</div>
+    <div id="prop-content"></div>
+  </div>
+
+  <!-- TRANSIT -->
+  <div class="panel" id="panel-transit" role="tabpanel" aria-labelledby="tab-transit">
+    <div class="section-title">Транзит власти — сценарии, триггеры, индикаторы</div>
+    <div id="transit-content"></div>
+  </div>
+
+  <!-- CONCLUSIONS -->
+  <div class="panel" id="panel-conclusions" role="tabpanel" aria-labelledby="tab-conclusions">
+    <div class="section-title">Итоговый анализ — всё что важно понять и помнить</div>
+    <div id="conclusions-content"></div>
+  </div>
+</main>
 
 <script type="module" src="js/app.js"></script>
 </body>

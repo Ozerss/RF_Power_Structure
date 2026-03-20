@@ -116,11 +116,11 @@ export function renderDecisionFlowSection({ mode, stepIdx, downSteps, upSteps, c
         <button class="flow-mode-btn${mode === "case" ? " active" : ""}" data-mode="case">Кейс 2022</button>
       </div>
     </div>
-    <div class="flow-stats">
-      <div class="hier-stat"><div class="hier-stat-num hier-stat-num--amber">9</div><div class="hier-stat-label">этапов принятия решения</div></div>
-      <div class="hier-stat"><div class="hier-stat-num hier-stat-num--red">15%</div><div class="hier-stat-label">информации доходит наверх без искажений</div></div>
-      <div class="hier-stat"><div class="hier-stat-num hier-stat-num--purple">0</div><div class="hier-stat-label">протоколов ключевых решений</div></div>
-      <div class="hier-stat"><div class="hier-stat-num hier-stat-num--green">8 лет</div><div class="hier-stat-label">накопления ошибки до 2022-го</div></div>
+    <div class="stat-grid">
+      <div class="stat-card stat-card--compact"><div class="stat-num stat-num--amber">9</div><div class="stat-label">этапов принятия решения</div></div>
+      <div class="stat-card stat-card--compact"><div class="stat-num stat-num--red">15%</div><div class="stat-label">информации доходит наверх без искажений</div></div>
+      <div class="stat-card stat-card--compact"><div class="stat-num stat-num--purple">0</div><div class="stat-label">протоколов ключевых решений</div></div>
+      <div class="stat-card stat-card--compact"><div class="stat-num stat-num--green">8 лет</div><div class="stat-label">накопления ошибки до 2022-го</div></div>
     </div>
     <div id="flow-mode-content">${modeContent}</div>`;
 }

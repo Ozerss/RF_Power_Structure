@@ -15,6 +15,32 @@ export function initTimeline(data) {
   const openCards = new Set();
   let mode = "rail";
 
+  function getFiltered() {
+    return activeCat === "all"
+      ? events
+      : events.filter((event) => event.cat === activeCat);
+  }
+
+  on(mainContainer, "click", (event) => {
+    if (!event.target.closest(".detail-close") || mode !== "rail") return;
+    selIdx = 0;
+    mainContainer.querySelectorAll(".tl3-sel").forEach((item) => {
+      item.classList.remove("tl3-sel");
+    });
+    setHTML(
+      byId("tl3-detail-area"),
+      renderTimelineDetail(null, 0, getFiltered().length, CATS)
+    );
+  });
+
+  on(mainContainer, "keydown", (event) => {
+    if ((event.key !== "Enter" && event.key !== " ") || mode !== "cards") return;
+    const card = event.target.closest("[data-ci]");
+    if (!card) return;
+    event.preventDefault();
+    card.click();
+  });
+
   function attachNavBtns(filtered) {
     on(byId("tl3-prev"), "click", () => {
       if (selIdx <= 0) return;
@@ -38,10 +64,7 @@ export function initTimeline(data) {
   }
 
   function render() {
-    const filtered =
-      activeCat === "all"
-        ? events
-        : events.filter((event) => event.cat === activeCat);
+    const filtered = getFiltered();
     selIdx = clamp(selIdx, 0, Math.max(filtered.length - 1, 0));
 
     setHTML(

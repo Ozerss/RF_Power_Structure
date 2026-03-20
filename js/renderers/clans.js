@@ -36,7 +36,7 @@ function buildClansNet({ C, clans, relations, POS, NR }) {
     const color = C[id];
     const abbr = clan.name.substring(0, 3).toUpperCase();
 
-    svg += `<g class="clan-node-g" data-clan="${id}">`;
+    svg += `<g class="clan-node-g" data-clan="${id}" tabindex="0" role="button" aria-label="${clan.name}">`;
     svg += `<circle cx="${pos.x}" cy="${pos.y}" r="${radius + 6}" fill="${color}" opacity="0.06"/>`;
     svg += `<circle cx="${pos.x}" cy="${pos.y}" r="${radius}" fill="${color}" opacity="0.88" stroke="${color}" stroke-width="0.5"/>`;
     svg += `<text x="${pos.x}" y="${pos.y}" text-anchor="middle" dominant-baseline="central" fill="var(--text)" font-size="9" font-weight="600" font-family="sans-serif">${abbr}</text>`;
@@ -85,6 +85,7 @@ export function renderClanDetail(id, { C, BG, clans }) {
   const trajIcons = ["▼ Ослабевает", "◆ Меняется", "● Стабилен", "▲ Растёт"];
 
   return `
+    <button class="detail-close" aria-label="Закрыть">×</button>
     <div class="clan-detail-top">
       <div class="clan-detail-av clan-detail-av--icon" style="background:${bg}">${clan.icon}</div>
       <div class="clan-detail-nameblock">
@@ -129,7 +130,7 @@ function buildClanCards({ C, BG, clans }) {
     const bg = BG[clan.id];
     const trajIcons = ["▼", "◆", "●", "▲"];
     const trajColors = ["var(--red)", "var(--amber)", "var(--text3)", "var(--green)"];
-    html += `<div class="clan-card-item" data-clan-card="${clan.id}">
+    html += `<div class="clan-card-item" data-clan-card="${clan.id}" tabindex="0" role="button" aria-expanded="false" aria-label="${clan.name}">
       <div class="cci-head">
         <div class="cci-icon">${clan.icon}</div>
         <div class="cci-nameblock">
@@ -200,7 +201,7 @@ export function renderClansSection({ mode, selClan, C, BG, clans, relations, POS
           <div class="clan-rel-leg-item hier-legend-hint">Нажмите на узел</div>
         </div>
         <div class="clan-net-wrap">${buildClansNet({ C, clans, relations, POS, NR })}</div>
-        <div class="clan-detail-panel${selClan ? " active" : ""}" id="clan-detail-out">
+        <div class="clan-detail-panel${selClan ? " active" : ""}" id="clan-detail-out" role="region" aria-live="polite" aria-label="Подробности">
           <div class="clan-hint">Нажмите на любой узел чтобы увидеть подробности о клане</div>
         </div>`
       : mode === "cards"
@@ -219,11 +220,11 @@ export function renderClansSection({ mode, selClan, C, BG, clans, relations, POS
         <button class="clan-mode-btn${mode === "equil" ? " active" : ""}" data-mode="equil">Почему держится</button>
       </div>
     </div>
-    <div class="flow-stats">
-      <div class="hier-stat"><div class="hier-stat-num hier-stat-num--amber">7</div><div class="hier-stat-label">кланов в системе</div></div>
-      <div class="hier-stat"><div class="hier-stat-num hier-stat-num--green">3</div><div class="hier-stat-label">союза укреплены войной</div></div>
-      <div class="hier-stat"><div class="hier-stat-num hier-stat-num--red">4</div><div class="hier-stat-label">зоны напряжения</div></div>
-      <div class="hier-stat"><div class="hier-stat-num hier-stat-num--purple">0</div><div class="hier-stat-label">игроков могут победить без Путина</div></div>
+    <div class="stat-grid">
+      <div class="stat-card stat-card--compact"><div class="stat-num stat-num--amber">7</div><div class="stat-label">кланов в системе</div></div>
+      <div class="stat-card stat-card--compact"><div class="stat-num stat-num--green">3</div><div class="stat-label">союза укреплены войной</div></div>
+      <div class="stat-card stat-card--compact"><div class="stat-num stat-num--red">4</div><div class="stat-label">зоны напряжения</div></div>
+      <div class="stat-card stat-card--compact"><div class="stat-num stat-num--purple">0</div><div class="stat-label">игроков могут победить без Путина</div></div>
     </div>
     <div id="clan-mode-area">${modeContent}</div>`;
 }

@@ -1,7 +1,16 @@
 {
   "permissions": {
     "allow": [
-      "mcp__Claude_Preview__preview_start"
+      "mcp__Claude_Preview__preview_start",
+      "Bash(wc -l /Users/alexanderlopatin/Desktop/PS/styles/*.css /Users/alexanderlopatin/Desktop/PS/js/*.js /Users/alexanderlopatin/Desktop/PS/js/features/*.js /Users/alexanderlopatin/Desktop/PS/js/renderers/*.js)",
+      "Bash(wc -l /Users/alexanderlopatin/Desktop/PS/styles/*.css /Users/alexanderlopatin/Desktop/PS/data/*.json)",
+      "Bash(grep -c \"style=\" /Users/alexanderlopatin/Desktop/PS/js/renderers/*.js)",
+      "Bash(grep -o \"style=\"\"[^\"\"]*\"\"\" /Users/alexanderlopatin/Desktop/PS/js/renderers/*.js)",
+      "Bash(grep -E \"null|undefined|{}\" /Users/alexanderlopatin/Desktop/PS/data/*.json)",
+      "Bash(wc -c /Users/alexanderlopatin/Desktop/PS/styles/*.css)",
+      "Bash(grep \"@media\" /Users/alexanderlopatin/Desktop/PS/styles/*.css)",
+      "Bash(grep -c \"setHTML\\\\|innerHTML\" /Users/alexanderlopatin/Desktop/PS/js/**/*.js)",
+      "Bash(grep \"innerHTML\\\\|querySelector\\\\|getElementById\" /Users/alexanderlopatin/Desktop/PS/js/features/*.js)"
     ]
   }
 }

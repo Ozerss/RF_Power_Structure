@@ -30,6 +30,16 @@ export function initHierarchy(data) {
   });
 
   on(container, "click", (event) => {
+    if (event.target.closest(".detail-close")) {
+      const panel = byId("hier-detail-panel");
+      container
+        .querySelectorAll(".hier-node-g.hier-sel")
+        .forEach((element) => element.classList.remove("hier-sel"));
+      setHTML(panel, renderHierarchyDetail(null, { CC, CLAN_BG, TC }));
+      panel?.classList.remove("sel");
+      return;
+    }
+
     const target = event.target.closest("[data-id]");
     if (!target) return;
     const node = findById(nodes, target.dataset.id);
@@ -45,5 +55,13 @@ export function initHierarchy(data) {
     const panel = byId("hier-detail-panel");
     setHTML(panel, renderHierarchyDetail(node, { CC, CLAN_BG, TC }));
     panel?.classList.add("sel");
+  });
+
+  on(container, "keydown", (event) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    const target = event.target.closest("[data-id]");
+    if (!target) return;
+    event.preventDefault();
+    target.click();
   });
 }

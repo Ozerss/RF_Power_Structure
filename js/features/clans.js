@@ -9,6 +9,36 @@ export function initClans(data) {
   let mode = "net";
   let selClan = null;
 
+  on(container, "click", (event) => {
+    if (!event.target.closest(".detail-close") || mode !== "net") return;
+    selClan = null;
+    container
+      .querySelectorAll(".clan-node-g")
+      .forEach((element) => element.classList.remove("cn-sel"));
+    const out = byId("clan-detail-out");
+    setHTML(out, renderClanDetail(null, { C, BG, clans }));
+    out?.classList.remove("active");
+  });
+
+  on(container, "keydown", (event) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+
+    if (mode === "net") {
+      const node = event.target.closest(".clan-node-g[data-clan]");
+      if (!node || node.dataset.clan === "putin-center") return;
+      event.preventDefault();
+      node.click();
+      return;
+    }
+
+    if (mode === "cards") {
+      const card = event.target.closest(".clan-card-item");
+      if (!card) return;
+      event.preventDefault();
+      card.click();
+    }
+  });
+
   function render() {
     setHTML(
       container,
@@ -57,6 +87,10 @@ export function initClans(data) {
         on(card, "click", () => {
           card.classList.toggle("cci-open");
           card.querySelector(".cci-body")?.classList.toggle("cci-open");
+          card.setAttribute(
+            "aria-expanded",
+            card.classList.contains("cci-open") ? "true" : "false"
+          );
         });
       });
     }

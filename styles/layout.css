@@ -1,4 +1,19 @@
 header { position: relative; padding: var(--sp-3xl) calc(var(--sp-3xl) + 44px) var(--sp-lg) var(--sp-3xl); border-bottom: 0.5px solid var(--border); }
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 0;
+    background: var(--amber);
+    color: var(--bg);
+    padding: 8px 16px;
+    z-index: 1000;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 0 0 var(--r) 0;
+  }
+  .skip-link:focus {
+    top: 0;
+  }
   header h1 { font-size: 20px; font-weight: var(--fw-medium); letter-spacing: -0.3px; }
   header p { font-size: var(--fs-base); color: var(--text2); margin-top: var(--sp-xs); }
   #theme-toggle {

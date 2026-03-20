@@ -3,10 +3,10 @@ export function renderPropagandaSection({ levels, narratives, techniques, checks
   html += `<div class="econ-section">
     <div class="econ-section-title"><span>💰</span> Масштаб: сколько стоит контроль над умами</div>
     <div class="econ-grid">
-      <div class="econ-stat"><div class="econ-stat-num prop-stat--red">₽137 млрд</div><div class="econ-stat-label">бюджет пропаганды 2025</div><div class="econ-stat-sub">Больше бюджета Калининградской области</div></div>
-      <div class="econ-stat"><div class="econ-stat-num prop-stat--amber">+13%</div><div class="econ-stat-label">рост расходов на СМИ vs 2024</div><div class="econ-stat-sub">Ежегодный рост несмотря на дефицит бюджета</div></div>
-      <div class="econ-stat"><div class="econ-stat-num prop-stat--purple">₽25 млрд</div><div class="econ-stat-label">бюджет ИРИ на 2025</div><div class="econ-stat-sub">Институт развития интернета — цифровая пропаганда</div></div>
-      <div class="econ-stat"><div class="econ-stat-num prop-stat--green">163</div><div class="econ-stat-label">проекта финансировал ИРИ за год</div><div class="econ-stat-sub">₽10 млрд на контент лояльных блогеров</div></div>
+      <div class="stat-card"><div class="stat-num stat-num--red">₽137 млрд</div><div class="stat-label">бюджет пропаганды 2025</div><div class="stat-sub">Больше бюджета Калининградской области</div></div>
+      <div class="stat-card"><div class="stat-num stat-num--amber">+13%</div><div class="stat-label">рост расходов на СМИ vs 2024</div><div class="stat-sub">Ежегодный рост несмотря на дефицит бюджета</div></div>
+      <div class="stat-card"><div class="stat-num stat-num--purple">₽25 млрд</div><div class="stat-label">бюджет ИРИ на 2025</div><div class="stat-sub">Институт развития интернета — цифровая пропаганда</div></div>
+      <div class="stat-card"><div class="stat-num stat-num--green">163</div><div class="stat-label">проекта финансировал ИРИ за год</div><div class="stat-sub">₽10 млрд на контент лояльных блогеров</div></div>
     </div>
   </div>`;
   html += `<div class="econ-section">

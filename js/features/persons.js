@@ -6,6 +6,7 @@ import {
 } from "../filters.js";
 import { renderPeopleCards } from "../renderers/people.js";
 import { matchesSearch, normalizeSearchQuery } from "../search.js";
+import { debounce } from "../utils.js";
 
 export function initPersons(data) {
   const filtersContainer = byId("ps-filters");
@@ -54,12 +55,12 @@ export function initPersons(data) {
     },
   });
 
-  on(searchInput, "input", (event) => {
+  on(searchInput, "input", debounce((event) => {
     const activeClan =
       getActiveFilterValue(filtersContainer, {
         itemSelector: ".ps-filter",
         getValue: (button) => button.dataset.clan,
       }) || "all";
     renderPersons(activeClan, event.target.value);
-  });
+  }, 200));
 }
