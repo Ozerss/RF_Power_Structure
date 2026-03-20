@@ -1,6 +1,6 @@
 export function renderPeopleCards(filtered, { psClanColors, trajLabels }) {
   if (!filtered.length) {
-    return '<p style="color:var(--text2);font-size:13px">Ничего не найдено</p>';
+    return '<p class="ps-empty">Ничего не найдено</p>';
   }
 
   return filtered
@@ -21,7 +21,7 @@ export function renderPeopleCards(filtered, { psClanColors, trajLabels }) {
             <div class="ps-tags">
               <span class="ps-tag" style="background:${clanColor.bg};border-color:${clanColor.color}44;color:${clanColor.color}">${person.clan}</span>
               <span class="ps-traj ${traj.cls}">${traj.label}</span>
-              ${person.tags.map((tag) => `<span class="ps-tag" style="background:var(--gray-bg);border-color:var(--border);color:var(--text2)">${tag}</span>`).join("")}
+              ${person.tags.map((tag) => `<span class="ps-tag ps-tag-default">${tag}</span>`).join("")}
             </div>
             <div class="ps-meters">
               <div class="ps-meter"><div class="ps-meter-label">Влияние</div><div class="ps-meter-bar"><div class="ps-meter-fill" style="width:${person.influence}%;background:${clanColor.color}"></div></div></div>

@@ -1,5 +1,6 @@
 import { createAppState, loadAppData } from "./state.js";
 import { initTabs } from "./tabs.js";
+import { initTheme } from "./theme.js";
 import { initHierarchy } from "./features/hierarchy.js";
 import { initFlow } from "./features/flow.js";
 import { initClans } from "./features/clans.js";
@@ -25,3 +26,4 @@ initEconomics(data.economics);
 initPropaganda(data.propaganda);
 initTransit(data.transit);
 initConclusions(data.conclusions);
+initTheme();

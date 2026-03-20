@@ -1,6 +1,24 @@
-header { padding: var(--sp-3xl) var(--sp-3xl) var(--sp-lg); border-bottom: 0.5px solid var(--border); }
+header { position: relative; padding: var(--sp-3xl) calc(var(--sp-3xl) + 44px) var(--sp-lg) var(--sp-3xl); border-bottom: 0.5px solid var(--border); }
   header h1 { font-size: 20px; font-weight: var(--fw-medium); letter-spacing: -0.3px; }
   header p { font-size: var(--fs-base); color: var(--text2); margin-top: var(--sp-xs); }
+  #theme-toggle {
+    position: absolute;
+    top: var(--sp-xl);
+    right: var(--sp-3xl);
+    min-width: 36px;
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: var(--text2);
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+  }
+  #theme-toggle:hover { color: var(--text); }
   
   .tabs { display: flex; gap: 0; border-bottom: 0.5px solid var(--border); padding: 0 var(--sp-3xl); overflow-x: auto; }
   .tab { padding: var(--sp-md) var(--sp-xl); font-size: var(--fs-md); cursor: pointer; color: var(--text2); border-bottom: 2px solid transparent; margin-bottom: -0.5px; white-space: nowrap; transition: all .2s; }
@@ -9,3 +27,40 @@ header { padding: var(--sp-3xl) var(--sp-3xl) var(--sp-lg); border-bottom: 0.5px
   
   .panel { display: none; padding: var(--sp-3xl); max-width: 900px; }
   .panel.active { display: block; }
+
+@media (max-width: 640px) {
+    body { overflow-x: hidden; }
+
+    header { padding: var(--sp-lg) calc(var(--sp-md) + 40px) var(--sp-sm) var(--sp-md); }
+    header h1 { font-size: 16px; }
+    header p { font-size: var(--fs-base); }
+    #theme-toggle {
+      top: var(--sp-md);
+      right: var(--sp-md);
+      min-width: 32px;
+      min-height: 32px;
+      font-size: 18px;
+    }
+
+    .tabs {
+      padding: 0 var(--sp-md);
+      overflow-x: auto;
+      overflow-y: hidden;
+      flex-wrap: nowrap;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .tabs::-webkit-scrollbar { display: none; }
+
+    .tab {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 10px 12px;
+      font-size: var(--fs-sm);
+    }
+
+    .panel { padding: var(--sp-md); }
+  }

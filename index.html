@@ -3,6 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+  (function(){
+    var t = localStorage.getItem('theme');
+    if (!t) t = matchMedia('(prefers-color-scheme:light)').matches ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', t);
+  })();
+</script>
 <title>Структура власти РФ</title>
 <link rel="stylesheet" href="styles/base.css">
 <link rel="stylesheet" href="styles/layout.css">
@@ -14,6 +21,7 @@
 <header>
   <h1>Структура власти Российской Федерации</h1>
   <p>Как устроена система, как принимаются решения, кто реально управляет — интерактивная схема</p>
+  <button id="theme-toggle" aria-label="Сменить тему">◐</button>
 </header>
 
 <div class="tabs">

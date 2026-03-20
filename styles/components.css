@@ -35,7 +35,10 @@
 .clan-mode-btn,
 .mech-mode-btn,
 .tl-mode-btn,
-.tl3-mode-btn {
+.tl3-mode-btn,
+.tl-cat-btn,
+.tl3-cat-btn,
+.tl3-era-pill {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -62,4 +65,39 @@
 .clan-mode-btn:hover:not(.active),
 .mech-mode-btn:hover:not(.active),
 .tl-mode-btn:hover:not(.active),
-.tl3-mode-btn:hover:not(.active) { border-color: var(--border2); color: var(--text); }
+.tl3-mode-btn:hover:not(.active),
+.tl-cat-btn:hover:not(.active),
+.tl3-cat-btn:hover:not(.active),
+.tl3-era-pill:hover:not(.active) { border-color: var(--border2); color: var(--text); }
+
+@media (max-width: 640px) {
+  .section-title {
+    font-size: var(--fs-xs);
+    letter-spacing: 0.5px;
+    margin-bottom: var(--sp-md);
+  }
+
+  .tl-filter,
+  .ps-filter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 6px 12px;
+    font-size: var(--fs-sm);
+  }
+
+  .hier-toggle-btn,
+  .flow-mode-btn,
+  .clan-mode-btn,
+  .mech-mode-btn,
+  .tl-mode-btn,
+  .tl3-mode-btn,
+  .tl-cat-btn,
+  .tl3-cat-btn,
+  .tl3-era-pill {
+    min-height: 44px;
+    padding: var(--sp-sm) 14px;
+    font-size: var(--fs-sm);
+  }
+}

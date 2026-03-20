@@ -47,5 +47,33 @@
     --sp-2xl: 24px;
     --sp-3xl: 32px;
   }
+
+  [data-theme="light"] {
+    --bg: #f5f4f0;
+    --bg2: #ffffff;
+    --bg3: #eae9e5;
+    --border: rgba(0,0,0,0.08);
+    --border2: rgba(0,0,0,0.13);
+    --text: #1a1a18;
+    --text2: #6a6860;
+    --text3: #9a9890;
+    --amber: #b97824;
+    --amber-bg: rgba(185,120,36,0.10);
+    --amber-border: rgba(185,120,36,0.28);
+    --red: #b54837;
+    --red-bg: rgba(181,72,55,0.10);
+    --red-border: rgba(181,72,55,0.28);
+    --blue: #2f75ab;
+    --blue-bg: rgba(47,117,171,0.10);
+    --blue-border: rgba(47,117,171,0.28);
+    --green: #4b8744;
+    --green-bg: rgba(75,135,68,0.10);
+    --green-border: rgba(75,135,68,0.28);
+    --purple: #6558af;
+    --purple-bg: rgba(101,88,175,0.10);
+    --purple-border: rgba(101,88,175,0.28);
+    --gray-bg: rgba(0,0,0,0.04);
+    --gray-border: rgba(0,0,0,0.10);
+  }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--bg); color: var(--text); font-family: -apple-system, 'Segoe UI', sans-serif; font-size: var(--fs-lg); font-weight: var(--fw-normal); line-height: var(--lh-normal); min-height: 100vh; }

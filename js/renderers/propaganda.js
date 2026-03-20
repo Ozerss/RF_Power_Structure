@@ -3,10 +3,10 @@ export function renderPropagandaSection({ levels, narratives, techniques, checks
   html += `<div class="econ-section">
     <div class="econ-section-title"><span>💰</span> Масштаб: сколько стоит контроль над умами</div>
     <div class="econ-grid">
-      <div class="econ-stat"><div class="econ-stat-num" style="color:#c94f3a">₽137 млрд</div><div class="econ-stat-label">бюджет пропаганды 2025</div><div class="econ-stat-sub">Больше бюджета Калининградской области</div></div>
-      <div class="econ-stat"><div class="econ-stat-num" style="color:#d4913a">+13%</div><div class="econ-stat-label">рост расходов на СМИ vs 2024</div><div class="econ-stat-sub">Ежегодный рост несмотря на дефицит бюджета</div></div>
-      <div class="econ-stat"><div class="econ-stat-num" style="color:#7a6ec4">₽25 млрд</div><div class="econ-stat-label">бюджет ИРИ на 2025</div><div class="econ-stat-sub">Институт развития интернета — цифровая пропаганда</div></div>
-      <div class="econ-stat"><div class="econ-stat-num" style="color:#5a9e52">163</div><div class="econ-stat-label">проекта финансировал ИРИ за год</div><div class="econ-stat-sub">₽10 млрд на контент лояльных блогеров</div></div>
+      <div class="econ-stat"><div class="econ-stat-num prop-stat--red">₽137 млрд</div><div class="econ-stat-label">бюджет пропаганды 2025</div><div class="econ-stat-sub">Больше бюджета Калининградской области</div></div>
+      <div class="econ-stat"><div class="econ-stat-num prop-stat--amber">+13%</div><div class="econ-stat-label">рост расходов на СМИ vs 2024</div><div class="econ-stat-sub">Ежегодный рост несмотря на дефицит бюджета</div></div>
+      <div class="econ-stat"><div class="econ-stat-num prop-stat--purple">₽25 млрд</div><div class="econ-stat-label">бюджет ИРИ на 2025</div><div class="econ-stat-sub">Институт развития интернета — цифровая пропаганда</div></div>
+      <div class="econ-stat"><div class="econ-stat-num prop-stat--green">163</div><div class="econ-stat-label">проекта финансировал ИРИ за год</div><div class="econ-stat-sub">₽10 млрд на контент лояльных блогеров</div></div>
     </div>
   </div>`;
   html += `<div class="econ-section">
@@ -28,10 +28,10 @@ export function renderPropagandaSection({ levels, narratives, techniques, checks
       <div class="prop-narrative-title">${narrative.icon} <span style="color:${narrative.color}">${narrative.title}</span></div>
       <div class="prop-narrative-body">${narrative.body}</div>
       <div class="prop-narrative-refute" style="background:${narrative.color}0f;border-color:${narrative.color};color:${narrative.color}cc">
-        <strong style="display:block;margin-bottom:3px;font-size:10px;text-transform:uppercase;letter-spacing:0.5px">Почему работает</strong>${narrative.why}
+        <strong class="prop-refute-label">Почему работает</strong>${narrative.why}
       </div>
-      <div class="prop-narrative-refute" style="background:rgba(90,158,82,0.08);border-color:rgba(90,158,82,0.5);color:#80b878;margin-top:5px">
-        <strong style="display:block;margin-bottom:3px;font-size:10px;text-transform:uppercase;letter-spacing:0.5px">Разбор</strong>${narrative.refute}
+      <div class="prop-narrative-refute prop-refute-green">
+        <strong class="prop-refute-label">Разбор</strong>${narrative.refute}
       </div>
     </div>`;
   });
