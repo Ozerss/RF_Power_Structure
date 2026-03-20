@@ -24,10 +24,12 @@ Do not assume this is a single-file app. Work with the modular structure that al
 Run locally as a static site, not through `file://`.
 
 ```bash
-python3 -m http.server 5500
+python3 -m http.server 8080
 ```
 
-Open: http://localhost:5500
+Open: http://localhost:8080
+
+Dev server config: `.claude/launch.json` (name: "Dev Server", port 8080).
 
 ## Completed work (do not repeat)
 
@@ -37,25 +39,45 @@ Open: http://localhost:5500
 4. **Spacing scale** — `--sp-xs` through `--sp-3xl` CSS variables in `base.css`. Applied across CSS files.
 5. **Section title unification** — single `.section-title` class in `components.css`.
 6. **Mode button unification** — all toggle/mode buttons share base styles in `components.css`.
+7. **Mobile adaptation pass** — comprehensive `@media (max-width: 640px)` rules in layout.css, components.css, sections.css. Target: 375px. 19+ new rule blocks.
+8. **Dark/light theme toggle** — `[data-theme="light"]` block in `base.css` with full color variable overrides. Toggle button `#theme-toggle` in header. `js/theme.js` module handles switching + localStorage persistence. FOUC-prevention inline script in `<head>`.
+9. **Inline styles extraction** — 240→86 `style=` across all 10 renderers. All remaining 86 are data-driven (dynamic colors, positions, widths). Zero hardcoded hex/rgba left in renderers. ~70 new CSS classes added to `sections.css`.
 
-All of the above were CSS-only changes. HTML and JS were not modified.
+Steps 1–6: CSS-only. Steps 7–9: CSS + minimal HTML/JS (theme toggle button, theme.js module).
+
+## Theme system
+
+- Dark = default. Light = `[data-theme="light"]` on `<html>`.
+- All color tokens live in `base.css`: `:root` (dark) and `[data-theme="light"]` (light).
+- Color variables: `--amber`, `--red`, `--blue`, `--green`, `--purple` + `*-bg`, `*-border` variants. Neutrals: `--bg`, `--bg2`, `--bg3`, `--border`, `--border2`, `--text`, `--text2`, `--text3`, `--gray-bg`, `--gray-border`.
+- 86 remaining inline `style=` in renderers use data-driven colors (dynamic `${color}`, `${bg}`, etc.) — they do NOT respond to theme toggle. This is known and expected.
+
+## Reusable CSS classes from inline styles extraction
+
+These classes were created during batches 1–4 and should be reused, not duplicated:
+- `.hier-stat-num--amber`, `--red`, `--purple`, `--green` — colored stat numbers
+- `.hier-stat--compact` — compact stat card padding
+- `.hier-header`, `.flow-header` — flex space-between header layout
+- `.hier-subtitle`, `.flow-subtitle` — small subtitle (font-size:11px, color:var(--text3))
+- `.hier-section-title`, `.flow-section-title` — section-title with reduced margin
+- `.hier-detail-badge--neutral` — neutral badge (gray-bg, border, text2)
+- `.hier-legend-hint` — small hint text
+- `.trap-intro` — intro paragraph (12px, text2, line-height 1.65)
+- Many more section-specific classes in `sections.css`.
 
 ## Known technical debt (do not fix unless explicitly requested)
 
-- **Inline styles in renderers** — 240 `style=` occurrences across `js/renderers/*.js`. These will be addressed in a dedicated pass.
 - **Parallel class families** — `.tl-*` and `.tl3-*` coexist (two timeline implementations).
-- **Card shell duplication** — each section implements its own card pattern.
-- **No dark/light toggle** — currently dark-only.
-- **No theme-aware SVG rendering** — SVG colors are hardcoded.
+- **Card shell duplication** — each section implements its own card/stat pattern (`.hier-stat`, `.flow-stats`, etc.).
+- **SVG not theme-aware** — SVG diagrams (hierarchy rings, clan graph, loyalty rings) use data-driven inline colors that don't switch with theme.
 - **No accessibility** — no ARIA roles, keyboard nav, focus styles.
 
-## Current priority
+## Current priorities (in order)
 
-**Mobile adaptation pass** — CSS only, target 375px width.
-
-Scope: `styles/layout.css`, `styles/components.css`, `styles/sections.css`.
-
-Not in scope: JS, HTML, inline styles, theme toggle, SVG rewrite, architectural cleanup.
+1. **SVG theme-aware rendering** — make SVG diagrams (hierarchy, clans, loyalty) respond to light/dark theme. Currently they use data-driven inline colors that stay the same in both themes.
+2. **Card shell unification** — deduplicate card/stat patterns across sections into shared classes.
+3. **Parallel class cleanup** — merge `.tl-*` / `.tl3-*` families where possible.
+4. **Content updates** — update/expand data in `data/*.json` files.
 
 ## Core rules
 

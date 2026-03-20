@@ -13,38 +13,38 @@ function buildTrapSvg({ mechs }) {
     { id: "normalization", r: 42 },
   ];
   const SOLID = {
-    war_complicity: "#b41e1e",
-    complicity: "#d46020",
-    law: "#c94f3a",
-    panopticon: "#7a6ec4",
-    noexit: "#4a8fc4",
-    rent: "#d4913a",
-    normalization: "#5a9e52",
+    war_complicity: "var(--red)",
+    complicity: "var(--amber)",
+    law: "var(--red)",
+    panopticon: "var(--purple)",
+    noexit: "var(--blue)",
+    rent: "var(--amber)",
+    normalization: "var(--green)",
   };
   const FILL = {
-    war_complicity: "rgba(180,30,30,0.82)",
-    complicity: "rgba(212,96,32,0.80)",
-    law: "rgba(201,79,58,0.78)",
-    panopticon: "rgba(122,110,196,0.78)",
-    noexit: "rgba(74,143,196,0.78)",
-    rent: "rgba(212,145,58,0.78)",
-    normalization: "rgba(90,158,82,0.85)",
+    war_complicity: { color: "var(--red)", opacity: 0.82 },
+    complicity: { color: "var(--amber)", opacity: 0.8 },
+    law: { color: "var(--red)", opacity: 0.78 },
+    panopticon: { color: "var(--purple)", opacity: 0.78 },
+    noexit: { color: "var(--blue)", opacity: 0.78 },
+    rent: { color: "var(--amber)", opacity: 0.78 },
+    normalization: { color: "var(--green)", opacity: 0.85 },
   };
 
   let svg = `<svg width="100%" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">`;
   LAYERS.forEach((layer) => {
     svg += `<g class="trap-node-g" data-mech="${layer.id}">`;
-    svg += `<circle cx="${CX}" cy="${CY}" r="${layer.r}" fill="${FILL[layer.id]}" stroke="${SOLID[layer.id]}" stroke-width="0.5" class="trap-ring-fill"/>`;
+    svg += `<circle cx="${CX}" cy="${CY}" r="${layer.r}" fill="${FILL[layer.id].color}" opacity="${FILL[layer.id].opacity}" stroke="${SOLID[layer.id]}" stroke-width="0.5" class="trap-ring-fill"/>`;
     svg += `</g>`;
   });
 
-  svg += `<circle cx="${CX}" cy="${CY}" r="28" fill="rgba(212,145,58,0.95)" stroke="#d4913a" stroke-width="1"/>`;
-  svg += `<text x="${CX}" y="${CY - 5}" text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="11" font-weight="600" font-family="sans-serif">АКТОР</text>`;
-  svg += `<text x="${CX}" y="${CY + 8}" text-anchor="middle" dominant-baseline="central" fill="rgba(255,255,255,0.65)" font-size="8" font-family="sans-serif">системы</text>`;
+  svg += `<circle cx="${CX}" cy="${CY}" r="28" fill="var(--amber)" opacity="0.95" stroke="var(--amber)" stroke-width="1"/>`;
+  svg += `<text x="${CX}" y="${CY - 5}" text-anchor="middle" dominant-baseline="central" fill="var(--text)" font-size="11" font-weight="600" font-family="sans-serif">АКТОР</text>`;
+  svg += `<text x="${CX}" y="${CY + 8}" text-anchor="middle" dominant-baseline="central" fill="var(--text2)" font-size="8" font-family="sans-serif">системы</text>`;
 
   const PX = 348;
-  svg += `<text x="${PX}" y="22" fill="rgba(255,255,255,0.4)" font-size="9" font-family="sans-serif">Механизм</text>`;
-  svg += `<text x="${PX + 178}" y="22" fill="rgba(255,255,255,0.4)" font-size="9" font-family="sans-serif" text-anchor="end">Интенсивность</text>`;
+  svg += `<text x="${PX}" y="22" fill="var(--text2)" opacity="0.4" font-size="9" font-family="sans-serif">Механизм</text>`;
+  svg += `<text x="${PX + 178}" y="22" fill="var(--text2)" opacity="0.4" font-size="9" font-family="sans-serif" text-anchor="end">Интенсивность</text>`;
 
   const mechOrder = ["war_complicity", "complicity", "law", "panopticon", "noexit", "rent", "normalization"];
   const mechLabels = {
@@ -64,10 +64,10 @@ function buildTrapSvg({ mechs }) {
     const pct = intensities[id];
     const maxBarW = 130;
     const barW = Math.round((pct / 100) * maxBarW);
-    svg += `<g class="trap-node-g" data-mech="${id}" style="cursor:pointer">`;
+    svg += `<g class="trap-node-g" data-mech="${id}">`;
     svg += `<rect x="${PX}" y="${y}" width="10" height="10" rx="2" fill="${color}" opacity="0.9"/>`;
     svg += `<text x="${PX + 14}" y="${y + 9}" fill="${color}" font-size="10" font-family="sans-serif">${mechLabels[id]}</text>`;
-    svg += `<rect x="${PX}" y="${y + 14}" width="${maxBarW}" height="6" rx="3" fill="rgba(255,255,255,0.07)"/>`;
+    svg += `<rect x="${PX}" y="${y + 14}" width="${maxBarW}" height="6" rx="3" fill="var(--border)"/>`;
     svg += `<rect x="${PX}" y="${y + 14}" width="${barW}" height="6" rx="3" fill="${color}" opacity="0.8"/>`;
     svg += `<text x="${PX + maxBarW + 6}" y="${y + 20}" fill="${color}" font-size="9" font-family="sans-serif">${pct}%</text>`;
     svg += `</g>`;
@@ -80,21 +80,21 @@ function buildTrapSvg({ mechs }) {
 export function renderLoyaltyDetail(id, { mechs }) {
   const mech = mechs.find((item) => item.id === id);
   if (!mech) {
-    return `<div class="trap-detail"><div class="trap-detail-title" style="color:var(--text3)">Нажмите на механизм для подробностей</div></div>`;
+    return `<div class="trap-detail"><div class="trap-detail-title trap-detail-hint">Нажмите на механизм для подробностей</div></div>`;
   }
 
   return `<div class="trap-detail active">
     <div class="trap-detail-header">
-      <div class="trap-detail-icon" style="background:${mech.bg};font-size:20px">${mech.icon}</div>
-      <div style="flex:1">
+      <div class="trap-detail-icon" style="background:${mech.bg}">${mech.icon}</div>
+      <div class="trap-detail-body">
         <div class="trap-detail-title" style="color:${mech.color}">${mech.label} ${mech.name}</div>
         <div class="trap-detail-sub">${mech.sub}</div>
         <div class="trap-detail-meta">
           ${mech.layers.map((layer) => `<span class="trap-meta-badge" style="background:${mech.bg};border-color:${mech.color}44;color:${mech.color}">${layer}</span>`).join("")}
         </div>
       </div>
-      <div style="display:flex;flex-direction:column;gap:4px;min-width:120px">
-        <div style="font-size:10px;color:var(--text3);margin-bottom:2px">Профиль воздействия</div>
+      <div class="trap-profile">
+        <div class="trap-profile-heading">Профиль воздействия</div>
         ${[
           ["Интенсивность", mech.intensity],
           ["Страх/принуждение", mech.fear],
@@ -102,9 +102,9 @@ export function renderLoyaltyDetail(id, { mechs }) {
           ["Социальный", mech.social],
         ]
           .map(
-            ([label, value]) => `<div style="display:flex;flex-direction:column;gap:2px">
-              <div style="font-size:9px;color:var(--text3)">${label}</div>
-              <div style="height:3px;background:var(--border);border-radius:2px;overflow:hidden">
+            ([label, value]) => `<div class="trap-profile-row">
+              <div class="trap-profile-label">${label}</div>
+              <div class="trap-profile-bar">
                 <div style="width:${value}%;height:3px;background:${mech.color};border-radius:2px"></div>
               </div>
             </div>`
@@ -117,7 +117,7 @@ export function renderLoyaltyDetail(id, { mechs }) {
       <div class="trap-section"><h5>Задокументированные примеры</h5><p>${mech.examples}</p></div>
       <div class="trap-section">
         <h5>Влияние войны 2022+</h5><p>${mech.war}</p>
-        <div class="trap-warning green" style="margin-top:8px"><strong>Как выйти:</strong> ${mech.escape}</div>
+        <div class="trap-warning green"><strong>Как выйти:</strong> ${mech.escape}</div>
       </div>
     </div>
   </div>`;
@@ -131,7 +131,7 @@ function intensityDots(count, color) {
 }
 
 function renderRoles({ roles, mechs }) {
-  let html = '<div style="font-size:12px;color:var(--text2);margin-bottom:1rem;line-height:1.65">Один и тот же механизм давит на разных людей по-разному. Нажмите на роль чтобы увидеть как ловушка закрывается для каждого.</div>';
+  let html = '<div class="trap-intro">Один и тот же механизм давит на разных людей по-разному. Нажмите на роль чтобы увидеть как ловушка закрывается для каждого.</div>';
   html += '<div class="roles-grid">';
   roles.forEach((role) => {
     html += `<div class="role-card" data-role-card="${role.id}">
@@ -142,14 +142,14 @@ function renderRoles({ roles, mechs }) {
       </div>
       <div class="rc-body">
         <div class="rc-body-inner">
-          <div style="font-size:12px;color:var(--text2);margin-bottom:10px;line-height:1.6">${role.intro}</div>
+          <div class="trap-intro trap-intro--tight">${role.intro}</div>
           ${role.mechs
             .map((roleMech) => {
               const mech = mechs.find((item) => item.id === roleMech.id);
               if (!mech) return "";
               return `<div class="rc-mech-row">
                 <div class="rc-mech-icon" style="background:${mech.bg}">${mech.icon}</div>
-                <div style="flex:1">
+                <div class="rc-mech-main">
                   <div class="rc-mech-label" style="color:${mech.color}">${mech.name}</div>
                   <div class="rc-mech-body">${roleMech.text}</div>
                   <div class="rc-intensity">${intensityDots(roleMech.intensity, mech.color)}</div>
@@ -167,7 +167,7 @@ function renderRoles({ roles, mechs }) {
 }
 
 function renderCases({ cases, mechs }) {
-  let html = '<div style="font-size:12px;color:var(--text2);margin-bottom:1rem;line-height:1.65">Реальные задокументированные случаи — каждый иллюстрирует конкретную комбинацию механизмов.</div>';
+  let html = '<div class="trap-intro">Реальные задокументированные случаи — каждый иллюстрирует конкретную комбинацию механизмов.</div>';
   html += '<div class="cases-list">';
   cases.forEach((item, index) => {
     html += `<div class="case-item">
@@ -197,7 +197,7 @@ export function renderLoyaltySection({ mode, selMech, mechs, roles, cases }) {
   const modeContent =
     mode === "trap"
       ? `
-        <div style="font-size:12px;color:var(--text2);margin-bottom:10px;line-height:1.65">Каждое кольцо — отдельный механизм удержания. Чем ближе к центру — тем более «мягкий» и незаметный. Чем дальше — тем более жёсткий. Нажмите на кольцо или на механизм в легенде.</div>
+        <div class="trap-intro trap-intro--tight">Каждое кольцо — отдельный механизм удержания. Чем ближе к центру — тем более «мягкий» и незаметный. Чем дальше — тем более жёсткий. Нажмите на кольцо или на механизм в легенде.</div>
         <div class="trap-svg-wrap">${buildTrapSvg({ mechs })}</div>
         <div id="mech-detail-out">${renderLoyaltyDetail(selMech, { mechs })}</div>`
       : mode === "roles"
@@ -205,22 +205,22 @@ export function renderLoyaltySection({ mode, selMech, mechs, roles, cases }) {
         : renderCases({ cases, mechs });
 
   return `
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:1rem">
+    <div class="hier-header">
       <div>
-        <div class="section-title" style="margin-bottom:4px">Механизмы лояльности — как система удерживает людей</div>
-        <div style="font-size:11px;color:var(--text3)">Не страх, а структура стимулов из которой невозможно выйти</div>
+        <div class="section-title flow-section-title">Механизмы лояльности — как система удерживает людей</div>
+        <div class="hier-subtitle">Не страх, а структура стимулов из которой невозможно выйти</div>
       </div>
-      <div style="display:flex;gap:6px;flex-wrap:wrap">
+      <div class="trap-mode-wrap">
         <button class="mech-mode-btn${mode === "trap" ? " active" : ""}" data-mode="trap">Ловушка</button>
         <button class="mech-mode-btn${mode === "roles" ? " active" : ""}" data-mode="roles">По ролям</button>
         <button class="mech-mode-btn${mode === "cases" ? " active" : ""}" data-mode="cases">Кейсы</button>
       </div>
     </div>
-    <div class="flow-stats" style="margin-bottom:1.25rem">
-      <div class="hier-stat"><div class="hier-stat-num" style="color:#d4913a">7</div><div class="hier-stat-label">механизмов удержания</div></div>
-      <div class="hier-stat"><div class="hier-stat-num" style="color:#c94f3a">98%</div><div class="hier-stat-label">интенсивность войны как замка</div></div>
-      <div class="hier-stat"><div class="hier-stat-num" style="color:#7a6ec4">0</div><div class="hier-stat-label">явных угроз — всё работает автоматически</div></div>
-      <div class="hier-stat"><div class="hier-stat-num" style="color:#5a9e52">1</div><div class="hier-stat-label">случай открытого бунта за 25 лет (Пригожин)</div></div>
+    <div class="flow-stats">
+      <div class="hier-stat"><div class="hier-stat-num hier-stat-num--amber">7</div><div class="hier-stat-label">механизмов удержания</div></div>
+      <div class="hier-stat"><div class="hier-stat-num hier-stat-num--red">98%</div><div class="hier-stat-label">интенсивность войны как замка</div></div>
+      <div class="hier-stat"><div class="hier-stat-num hier-stat-num--purple">0</div><div class="hier-stat-label">явных угроз — всё работает автоматически</div></div>
+      <div class="hier-stat"><div class="hier-stat-num hier-stat-num--green">1</div><div class="hier-stat-label">случай открытого бунта за 25 лет (Пригожин)</div></div>
     </div>
     <div id="mech-mode-area">${modeContent}</div>`;
 }

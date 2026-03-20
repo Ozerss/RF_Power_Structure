@@ -12,30 +12,30 @@ export function renderEconomySection({ stats, econCards }) {
   html += `</div></div>`;
   html += `<div class="econ-section">
     <div class="econ-section-title"><span>🔄</span> Как деньги текут через систему</div>
-    <div style="background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--r2);padding:1.25rem;margin-bottom:1rem">
-      <div style="font-size:12px;color:var(--text2);margin-bottom:12px">Главный поток: от недр к карману элиты</div>
+    <div class="econ-flow-wrap">
+      <div class="econ-flow-label">Главный поток: от недр к карману элиты</div>
       <div class="econ-flow-row">
-        <div class="econ-flow-step" style="background:rgba(212,145,58,0.12);border:0.5px solid rgba(212,145,58,0.3);color:#d4a060"><strong style="display:block;margin-bottom:3px">Ресурсы</strong>Нефть, газ, металлы из земли</div>
+        <div class="econ-flow-step econ-flow-step--amber"><strong class="econ-flow-step-title">Ресурсы</strong>Нефть, газ, металлы из земли</div>
         <div class="econ-flow-arrow">→</div>
-        <div class="econ-flow-step" style="background:rgba(212,145,58,0.12);border:0.5px solid rgba(212,145,58,0.3);color:#d4a060"><strong style="display:block;margin-bottom:3px">Госкорпорации</strong>Роснефть, Газпром, Алроса</div>
+        <div class="econ-flow-step econ-flow-step--amber"><strong class="econ-flow-step-title">Госкорпорации</strong>Роснефть, Газпром, Алроса</div>
         <div class="econ-flow-arrow">→</div>
-        <div class="econ-flow-step" style="background:rgba(74,143,196,0.12);border:0.5px solid rgba(74,143,196,0.3);color:#70a8d8"><strong style="display:block;margin-bottom:3px">Бюджет</strong>30–50% доходов из углеводородов</div>
+        <div class="econ-flow-step econ-flow-step--blue"><strong class="econ-flow-step-title">Бюджет</strong>30–50% доходов из углеводородов</div>
         <div class="econ-flow-arrow">→</div>
-        <div class="econ-flow-step" style="background:rgba(201,79,58,0.12);border:0.5px solid rgba(201,79,58,0.3);color:#e07060"><strong style="display:block;margin-bottom:3px">Силовики и ВПК</strong>40% расходов в 2025</div>
+        <div class="econ-flow-step econ-flow-step--red"><strong class="econ-flow-step-title">Силовики и ВПК</strong>40% расходов в 2025</div>
         <div class="econ-flow-arrow">→</div>
-        <div class="econ-flow-step" style="background:rgba(122,110,196,0.12);border:0.5px solid rgba(122,110,196,0.3);color:#a098d8"><strong style="display:block;margin-bottom:3px">Офшоры</strong>BVI, Кипр, ОАЭ, Швейцария</div>
+        <div class="econ-flow-step econ-flow-step--purple"><strong class="econ-flow-step-title">Офшоры</strong>BVI, Кипр, ОАЭ, Швейцария</div>
       </div>
-      <div style="font-size:12px;color:var(--text2);margin-top:4px;margin-bottom:12px">Параллельный поток: госконтракты как инструмент лояльности</div>
+      <div class="econ-flow-label econ-flow-label--secondary">Параллельный поток: госконтракты как инструмент лояльности</div>
       <div class="econ-flow-row">
-        <div class="econ-flow-step" style="background:rgba(74,143,196,0.12);border:0.5px solid rgba(74,143,196,0.3);color:#70a8d8"><strong style="display:block;margin-bottom:3px">Бюджет</strong>Госзаказ без реального тендера</div>
+        <div class="econ-flow-step econ-flow-step--blue"><strong class="econ-flow-step-title">Бюджет</strong>Госзаказ без реального тендера</div>
         <div class="econ-flow-arrow">→</div>
-        <div class="econ-flow-step" style="background:rgba(212,145,58,0.12);border:0.5px solid rgba(212,145,58,0.3);color:#d4a060"><strong style="display:block;margin-bottom:3px">Нужные компании</strong>Ротенберги, Тимченко, круг лояльных</div>
+        <div class="econ-flow-step econ-flow-step--amber"><strong class="econ-flow-step-title">Нужные компании</strong>Ротенберги, Тимченко, круг лояльных</div>
         <div class="econ-flow-arrow">→</div>
-        <div class="econ-flow-step" style="background:rgba(212,145,58,0.12);border:0.5px solid rgba(212,145,58,0.3);color:#d4a060"><strong style="display:block;margin-bottom:3px">Завышенная цена</strong>30–40% наценка к рыночной</div>
+        <div class="econ-flow-step econ-flow-step--amber"><strong class="econ-flow-step-title">Завышенная цена</strong>30–40% наценка к рыночной</div>
         <div class="econ-flow-arrow">→</div>
-        <div class="econ-flow-step" style="background:rgba(122,110,196,0.12);border:0.5px solid rgba(122,110,196,0.3);color:#a098d8"><strong style="display:block;margin-bottom:3px">Откат наверх</strong>Часть возвращается в систему</div>
+        <div class="econ-flow-step econ-flow-step--purple"><strong class="econ-flow-step-title">Откат наверх</strong>Часть возвращается в систему</div>
         <div class="econ-flow-arrow">→</div>
-        <div class="econ-flow-step" style="background:rgba(90,158,82,0.12);border:0.5px solid rgba(90,158,82,0.3);color:#80b878"><strong style="display:block;margin-bottom:3px">Лояльность</strong>Круговая порука закреплена деньгами</div>
+        <div class="econ-flow-step econ-flow-step--green"><strong class="econ-flow-step-title">Лояльность</strong>Круговая порука закреплена деньгами</div>
       </div>
     </div>
   </div>`;
@@ -54,14 +54,14 @@ export function renderEconomySection({ stats, econCards }) {
   html += `</div>`;
   html += `<div class="econ-section">
     <div class="econ-section-title"><span>📚</span> Источники и где копать дальше</div>
-    <div style="background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--r2);padding:1.25rem">
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;font-size:12px;color:var(--text2)">
-        <div><div style="font-size:11px;color:var(--text3);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.6px">Расследования</div>
-          <div style="line-height:2">OCCRP — occrp.org<br>ICIJ Pandora/Panama Papers<br>iStories (istories.media)<br>Meduza (meduza.io)</div></div>
-        <div><div style="font-size:11px;color:var(--text3);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.6px">Книги</div>
-          <div style="line-height:2">Белтон — "Люди Путина"<br>Дотсон — "Клептократия Путина"<br>Зыгарь — "Все кремлёвские люди"<br>Ослунд — "Крони-капитализм"</div></div>
-        <div><div style="font-size:11px;color:var(--text3);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.6px">Аналитика</div>
-          <div style="line-height:2">Carnegie Russia Eurasia Center<br>Oxford Institute for Energy Studies<br>Bruegel (bruegel.org)<br>Atlantic Council</div></div>
+    <div class="econ-sources-wrap">
+      <div class="econ-sources-grid">
+        <div><div class="econ-sources-cat">Расследования</div>
+          <div class="econ-sources-list">OCCRP — occrp.org<br>ICIJ Pandora/Panama Papers<br>iStories (istories.media)<br>Meduza (meduza.io)</div></div>
+        <div><div class="econ-sources-cat">Книги</div>
+          <div class="econ-sources-list">Белтон — "Люди Путина"<br>Дотсон — "Клептократия Путина"<br>Зыгарь — "Все кремлёвские люди"<br>Ослунд — "Крони-капитализм"</div></div>
+        <div><div class="econ-sources-cat">Аналитика</div>
+          <div class="econ-sources-list">Carnegie Russia Eurasia Center<br>Oxford Institute for Energy Studies<br>Bruegel (bruegel.org)<br>Atlantic Council</div></div>
       </div>
     </div>
   </div>`;

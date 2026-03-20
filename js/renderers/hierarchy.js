@@ -41,29 +41,21 @@ function buildHierarchySvg({ CC, TC, nodes }) {
   const RADII = [0, 88, 166, 244, 308];
   const NODE_R = [32, 19, 16, 14, 15];
 
-  let svg = `<svg width="100%" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="max-width:680px">`;
-  const zoneFills = [
-    "rgba(212,145,58,0.06)",
-    "rgba(255,255,255,0.025)",
-    "rgba(255,255,255,0.015)",
-    "rgba(255,255,255,0.01)",
-    "rgba(255,255,255,0.005)",
-  ];
-
+  let svg = `<svg width="100%" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">`;
   for (let i = 4; i >= 0; i -= 1) {
     const radius = RADII[i] + (i < 4 ? NODE_R[i] + 8 : 15);
-    svg += `<circle cx="${CX}" cy="${CY}" r="${radius}" fill="${zoneFills[i]}" stroke="none"/>`;
+    svg += `<circle cx="${CX}" cy="${CY}" r="${radius}" class="hier-zone-fill hier-zone-fill--${i}"/>`;
   }
 
   [1, 2, 3, 4].forEach((i) => {
-    svg += `<circle cx="${CX}" cy="${CY}" r="${RADII[i]}" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.5" stroke-dasharray="3 4"/>`;
+    svg += `<circle cx="${CX}" cy="${CY}" r="${RADII[i]}" class="hier-ring-outline-svg"/>`;
   });
 
   const ringLabels = ["", "Ближний круг", "Ключевые операторы", "Функциональный слой", "Системная периферия"];
   [1, 2, 3].forEach((i) => {
     const lx = CX + RADII[i] * Math.cos(-0.26) + 8;
     const ly = CY + RADII[i] * Math.sin(-0.26) - 4;
-    svg += `<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" fill="rgba(255,255,255,0.18)" font-size="9" font-family="sans-serif">${ringLabels[i]}</text>`;
+    svg += `<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" class="hier-ring-label-svg">${ringLabels[i]}</text>`;
   });
 
   nodes.forEach((node) => {
@@ -93,18 +85,18 @@ function buildHierarchySvg({ CC, TC, nodes }) {
     const baseline = sin < -0.35 ? "auto" : sin > 0.35 ? "hanging" : "central";
 
     if (node.ring === 0) {
-      svg += `<g class="hier-node-g" data-id="${node.id}" style="cursor:pointer">`;
+      svg += `<g class="hier-node-g" data-id="${node.id}">`;
       svg += `<circle cx="${CX}" cy="${CY}" r="38" fill="${color}" opacity="0.12"/>`;
       svg += `<circle cx="${CX}" cy="${CY}" r="32" fill="${color}" opacity="0.9" stroke="${color}" stroke-width="1.5" class="hier-nc"/>`;
-      svg += `<text x="${CX}" y="${CY}" text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="11" font-weight="600" font-family="sans-serif">${node.abbr}</text>`;
+      svg += `<text x="${CX}" y="${CY}" text-anchor="middle" dominant-baseline="central" class="hier-node-abbr-svg" font-size="11" font-weight="600">${node.abbr}</text>`;
       svg += `<text x="${CX}" y="${CY + 50}" text-anchor="middle" fill="${color}" font-size="13" font-weight="500" font-family="sans-serif">${node.name}</text>`;
       svg += `</g>`;
       return;
     }
 
-    svg += `<g class="hier-node-g" data-id="${node.id}" style="cursor:pointer">`;
+    svg += `<g class="hier-node-g" data-id="${node.id}">`;
     svg += `<circle cx="${node.x.toFixed(1)}" cy="${node.y.toFixed(1)}" r="${radius}" fill="${color}" opacity="0.85" stroke="${color}" stroke-width="0.5" class="hier-nc"/>`;
-    svg += `<text x="${node.x.toFixed(1)}" y="${node.y.toFixed(1)}" text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="${node.ring <= 2 ? 9 : 8}" font-family="sans-serif" font-weight="500">${node.abbr}</text>`;
+    svg += `<text x="${node.x.toFixed(1)}" y="${node.y.toFixed(1)}" text-anchor="middle" dominant-baseline="central" class="hier-node-abbr-svg" font-size="${node.ring <= 2 ? 9 : 8}" font-weight="500">${node.abbr}</text>`;
 
     const bx = (node.x + cos * (radius + 2)).toFixed(1);
     const by = (node.y + sin * (radius + 2) - radius * 0.6).toFixed(1);
@@ -156,13 +148,13 @@ export function renderHierarchyDetail(node, { CC, CLAN_BG, TC }) {
   const influence = Math.round(node.influence);
   return `<div class="hier-detail-top">
     <div class="hier-detail-av" style="background:${bg};color:${color}">${node.abbr}</div>
-    <div style="flex:1">
+    <div class="hier-detail-main">
       <div class="hier-detail-name" style="color:${color}">${node.name}</div>
       <div class="hier-detail-role">${node.role}</div>
       <div class="hier-detail-meta">
         <span class="hier-detail-badge" style="background:${bg};border-color:${color}44;color:${color}">${node.clan_label}</span>
         <span class="hier-detail-badge" style="background:${traj.color}18;border-color:${traj.color}44;color:${traj.color}">${traj.icon} ${node.status}</span>
-        <span class="hier-detail-badge" style="background:rgba(255,255,255,0.04);border-color:var(--border);color:var(--text2)">Влияние: ${influence}/100</span>
+        <span class="hier-detail-badge hier-detail-badge--neutral">Влияние: ${influence}/100</span>
       </div>
     </div></div>
   <div class="hier-detail-body">${node.detail}</div>`;
@@ -183,10 +175,10 @@ export function renderHierarchySection(data) {
   ];
 
   return `
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:1rem">
+    <div class="hier-header">
       <div>
-        <div class="section-title" style="margin-bottom:6px">Карта реального влияния — 2026</div>
-        <div style="font-size:11px;color:var(--text3)">Близость к центру = реальная власть, не формальный титул</div>
+        <div class="section-title hier-section-title">Карта реального влияния — 2026</div>
+        <div class="hier-subtitle">Близость к центру = реальная власть, не формальный титул</div>
       </div>
       <div class="hier-toggle">
         <button class="hier-toggle-btn active" id="btn-rings">Кольца влияния</button>
@@ -194,19 +186,19 @@ export function renderHierarchySection(data) {
       </div>
     </div>
     <div class="hier-stats">
-      <div class="hier-stat"><div class="hier-stat-num" style="color:#d4913a">25</div><div class="hier-stat-label">ключевых игроков в карте</div></div>
-      <div class="hier-stat"><div class="hier-stat-num" style="color:#7a6ec4">4</div><div class="hier-stat-label">кольца удалённости от Путина</div></div>
-      <div class="hier-stat"><div class="hier-stat-num" style="color:#5a9e52">6</div><div class="hier-stat-label">игроков с растущим влиянием</div></div>
-      <div class="hier-stat"><div class="hier-stat-num" style="color:#c94f3a">5</div><div class="hier-stat-label">игроков теряют позиции</div></div>
+      <div class="hier-stat"><div class="hier-stat-num hier-stat-num--amber">25</div><div class="hier-stat-label">ключевых игроков в карте</div></div>
+      <div class="hier-stat"><div class="hier-stat-num hier-stat-num--purple">4</div><div class="hier-stat-label">кольца удалённости от Путина</div></div>
+      <div class="hier-stat"><div class="hier-stat-num hier-stat-num--green">6</div><div class="hier-stat-label">игроков с растущим влиянием</div></div>
+      <div class="hier-stat"><div class="hier-stat-num hier-stat-num--red">5</div><div class="hier-stat-label">игроков теряют позиции</div></div>
     </div>
-    <div class="hier-legend" style="margin-bottom:0.75rem">
+    <div class="hier-legend hier-legend--tight">
       ${clanEntries.map((entry) => `<div class="hier-leg-item"><div class="hier-leg-dot" style="background:${CC[entry.key]}"></div>${entry.label}</div>`).join("")}
     </div>
-    <div class="hier-legend" style="margin-bottom:1rem">
-      <div class="hier-leg-item"><span style="color:#5a9e52;font-size:10px">▲</span>&nbsp;Растёт</div>
-      <div class="hier-leg-item"><span style="color:#c94f3a;font-size:10px">▼</span>&nbsp;Падает</div>
-      <div class="hier-leg-item"><span style="color:#d4913a;font-size:10px">◆</span>&nbsp;Неясно</div>
-      <div class="hier-leg-item" style="font-size:10px;color:var(--text3)">Нажмите на узел для подробностей</div>
+    <div class="hier-legend hier-legend--spaced">
+      <div class="hier-leg-item"><span class="hier-trend hier-trend--up">▲</span>&nbsp;Растёт</div>
+      <div class="hier-leg-item"><span class="hier-trend hier-trend--down">▼</span>&nbsp;Падает</div>
+      <div class="hier-leg-item"><span class="hier-trend hier-trend--unclear">◆</span>&nbsp;Неясно</div>
+      <div class="hier-leg-item hier-legend-hint">Нажмите на узел для подробностей</div>
     </div>
     <div class="hier-rings active" id="hier-rings-wrap">
       <div class="hier-svg-wrap">${buildHierarchySvg({ CC, TC, nodes })}</div>

@@ -1,21 +1,21 @@
 function catColor(CATS, cat) {
-  return (CATS[cat] || { color: "#888" }).color;
+  return (CATS[cat] || { color: "var(--text3)" }).color;
 }
 
 export function renderTimelineDetail(event, idx, totalFiltered, CATS) {
-  if (!event) return `<div class="tl3-detail"><div style="font-size:12px;color:var(--text3)">Нажмите на точку для подробностей</div></div>`;
+  if (!event) return `<div class="tl3-detail"><div class="tl3-detail-hint">Нажмите на точку для подробностей</div></div>`;
   const color = catColor(CATS, event.cat);
-  return `<div class="tl3-detail tl3-detail-active">
+  return `<div class="tl3-detail tl3-detail-active tl3-detail--accent" style="--tl3-accent:${color};--tl3-accent-bg:${color}15;--tl3-accent-border:${color}44;--tl3-accent-soft:${color}cc">
     <div class="tl3-detail-top">
-      <div class="tl3-detail-year" style="color:${color}">${event.y}</div>
+      <div class="tl3-detail-year">${event.y}</div>
       <div class="tl3-detail-content">
-        <div class="tl3-detail-title" style="color:${color}">${event.title}</div>
+        <div class="tl3-detail-title">${event.title}</div>
         <div class="tl3-detail-badges">
-          <span class="tl3-detail-badge" style="background:${color}15;border-color:${color}44;color:${color}">${CATS[event.cat].label}</span>
-          <span class="tl3-detail-badge" style="background:rgba(255,255,255,0.04);border-color:var(--border);color:var(--text2)">Удар ${event.impact}/10</span>
+          <span class="tl3-detail-badge tl3-detail-badge--accent">${CATS[event.cat].label}</span>
+          <span class="tl3-detail-badge hier-detail-badge--neutral">Удар ${event.impact}/10</span>
         </div>
         <div class="tl3-detail-body">${event.body}</div>
-        <div class="tl3-detail-sig" style="border-color:${color};color:${color}cc">${event.sig}</div>
+        <div class="tl3-detail-sig">${event.sig}</div>
         <div class="tl3-nav-btns">
           ${idx > 0 ? `<button class="tl3-nav-btn" id="tl3-prev">← ${idx}/${totalFiltered}</button>` : ""}
           ${idx < totalFiltered - 1 ? `<button class="tl3-nav-btn" id="tl3-next">${idx + 2}/${totalFiltered} →</button>` : ""}
@@ -58,7 +58,7 @@ function buildRail({ filtered, selIdx, CATS, ERAS }) {
   allYears.forEach((year) => {
     const x = xOf(year);
     const isMajor = year % 5 === 0 || year === 1999 || year === 2025;
-    html += `<div class="tl3-year-tick" style="left:${x}px;height:${isMajor ? 18 : 10}px;background:rgba(255,255,255,${isMajor ? 0.25 : 0.1})"></div>`;
+    html += `<div class="tl3-year-tick" style="left:${x}px;height:${isMajor ? 18 : 10}px;background:${isMajor ? "var(--border2)" : "var(--border)"}"></div>`;
     if (isMajor) html += `<div class="tl3-year-label" style="left:${x}px">${year}</div>`;
   });
 
@@ -75,7 +75,7 @@ function buildRail({ filtered, selIdx, CATS, ERAS }) {
     const shortTitle = event.title.length > 22 ? `${event.title.substring(0, 20)}…` : event.title;
     const impactDots = Array.from(
       { length: 5 },
-      (_, index) => `<div class="tl3-pip" style="background:${index < Math.round(event.impact / 2) ? color : "rgba(255,255,255,0.15)"}"></div>`
+      (_, index) => `<div class="tl3-pip" style="background:${index < Math.round(event.impact / 2) ? color : "var(--border)"}"></div>`
     ).join("");
 
     html += `<div class="tl3-event-dot-wrap${isAbove ? " above" : " below"}${isSelected ? " tl3-sel" : ""}"
@@ -99,7 +99,7 @@ function buildCards({ filtered, openCards, CATS }) {
     const isOpen = openCards.has(index);
     const dots = Array.from(
       { length: 10 },
-      (_, dotIndex) => `<div class="tl3-imp-dot" style="background:${dotIndex < event.impact ? color : "rgba(255,255,255,0.1)"}"></div>`
+      (_, dotIndex) => `<div class="tl3-imp-dot" style="background:${dotIndex < event.impact ? color : "var(--border)"}"></div>`
     ).join("");
     html += `<div class="tl3-card${isOpen ? " tl3-card-open" : ""}" data-ci="${index}" style="border-left-color:${color}">
       <div class="tl3-card-head">
@@ -110,7 +110,7 @@ function buildCards({ filtered, openCards, CATS }) {
           <div class="tl3-card-chev">›</div>
         </div>
       </div>
-      ${isOpen ? `<div class="tl3-card-body">${event.body}<div class="tl3-card-sig" style="border-color:${color};color:${color}cc;display:block">${event.sig}</div></div>` : ""}
+      ${isOpen ? `<div class="tl3-card-body">${event.body}<div class="tl3-card-sig tl3-card-sig--open" style="border-color:${color};color:${color}cc">${event.sig}</div></div>` : ""}
     </div>`;
   });
   html += `</div>`;
@@ -122,22 +122,22 @@ export function renderTimelineSection({ mode, selIdx, activeCat, openCards, CATS
   const detailHtml = renderTimelineDetail(filtered[selIdx] || null, selIdx, filtered.length, CATS);
 
   return `
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:1rem">
+    <div class="hier-header">
       <div>
-        <div class="section-title" style="margin-bottom:4px">Хронология — 1999–2025</div>
-        <div style="font-size:11px;color:var(--text3)">Как Путин уничтожал противовесы: 33 события за 27 лет</div>
+        <div class="section-title flow-section-title">Хронология — 1999–2025</div>
+        <div class="hier-subtitle">Как Путин уничтожал противовесы: 33 события за 27 лет</div>
       </div>
-      <div class="tl3-mode-row" style="margin-bottom:0">
+      <div class="tl3-mode-row tl3-mode-row--flush">
         <button class="tl3-mode-btn${mode === "rail" ? " active" : ""}" data-m="rail">Рельс времени</button>
         <button class="tl3-mode-btn${mode === "cards" ? " active" : ""}" data-m="cards">Список</button>
       </div>
     </div>
 
     <div class="tl3-stats-grid">
-      <div class="hier-stat" style="padding:8px 12px"><div class="hier-stat-num" style="color:#d4913a;font-size:20px">${events.length}</div><div class="hier-stat-label">ключевых событий</div></div>
-      <div class="hier-stat" style="padding:8px 12px"><div class="hier-stat-num" style="color:#c94f3a;font-size:20px">${critCount}</div><div class="hier-stat-label">критических (9–10/10)</div></div>
-      <div class="hier-stat" style="padding:8px 12px"><div class="hier-stat-num" style="color:#5a9e52;font-size:20px">${ERAS.length}</div><div class="hier-stat-label">исторических эпох</div></div>
-      <div class="hier-stat" style="padding:8px 12px"><div class="hier-stat-num" style="color:#7a6ec4;font-size:20px">27</div><div class="hier-stat-label">лет консолидации</div></div>
+      <div class="hier-stat hier-stat--compact"><div class="hier-stat-num hier-stat-num--amber">${events.length}</div><div class="hier-stat-label">ключевых событий</div></div>
+      <div class="hier-stat hier-stat--compact"><div class="hier-stat-num hier-stat-num--red">${critCount}</div><div class="hier-stat-label">критических (9–10/10)</div></div>
+      <div class="hier-stat hier-stat--compact"><div class="hier-stat-num hier-stat-num--green">${ERAS.length}</div><div class="hier-stat-label">исторических эпох</div></div>
+      <div class="hier-stat hier-stat--compact"><div class="hier-stat-num hier-stat-num--purple">27</div><div class="hier-stat-label">лет консолидации</div></div>
     </div>
 
     <div class="tl3-cat-row">
@@ -157,7 +157,7 @@ export function renderTimelineSection({ mode, selIdx, activeCat, openCards, CATS
 
     ${mode === "rail"
       ? `
-      <div style="font-size:11px;color:var(--text3);margin-bottom:6px">← прокрутите горизонтально · нажмите на точку для подробностей</div>
+      <div class="tl3-rail-hint">← прокрутите горизонтально · нажмите на точку для подробностей</div>
       ${buildRail({ filtered, selIdx, CATS, ERAS })}
       <div id="tl3-detail-area">${detailHtml}</div>
     `
