@@ -15,12 +15,20 @@ export function renderConclusionsSection({ principles, myths, roadmap, sources, 
   });
   html += `</div>`;
   html += `<div class="econ-section">
-    <div class="econ-section-title concl-section-heading"><span>🔥</span> Популярные заблуждения — и реальность</div>
+    <div class="econ-section-title concl-section-heading"><span>🔍</span> Частые аргументы — честный разбор</div>
     <div class="concl-myths">`;
   myths.forEach((myth) => {
     html += `<div class="concl-myth">
-      <div class="concl-myth-q"><div class="concl-myth-label concl-myth-label--myth">❌ Миф</div>${myth.myth}</div>
-      <div class="concl-myth-a"><div class="concl-myth-label concl-myth-label--reality">✓ Реальность</div>${myth.reality}</div>
+      <div class="concl-myth-q">
+        <div class="concl-myth-label concl-myth-label--argument">📌 Аргумент</div>
+        <div class="concl-myth-argument-text">${myth.argument}</div>
+        <div class="concl-myth-label concl-myth-label--valid">✓ Что здесь верно</div>
+        <div class="concl-myth-valid-text">${myth.valid}</div>
+      </div>
+      <div class="concl-myth-a">
+        <div class="concl-myth-label concl-myth-label--refutation">→ Почему из этого не следует</div>
+        ${myth.refutation}
+      </div>
     </div>`;
   });
   html += `</div></div>`;
