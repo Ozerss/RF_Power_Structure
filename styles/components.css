@@ -38,6 +38,7 @@
 .ps-filter.active { background: var(--amber-bg); border-color: var(--amber-border); color: var(--amber); }
 
 /* Shared mode toggles */
+.mode-btn,
 .hier-toggle-btn,
 .flow-mode-btn,
 .clan-mode-btn,
@@ -62,12 +63,14 @@
   cursor: pointer;
   transition: all .15s;
 }
+.mode-btn.active,
 .hier-toggle-btn.active,
 .flow-mode-btn.active,
 .clan-mode-btn.active,
 .mech-mode-btn.active,
 .tl-mode-btn.active,
 .tl3-mode-btn.active { background: var(--amber-bg); border-color: var(--amber-border); color: var(--amber); }
+.mode-btn:hover:not(.active),
 .hier-toggle-btn:hover:not(.active),
 .flow-mode-btn:hover:not(.active),
 .clan-mode-btn:hover:not(.active),
@@ -137,6 +140,7 @@ button:focus-visible,
     font-size: var(--fs-sm);
   }
 
+  .mode-btn,
   .hier-toggle-btn,
   .flow-mode-btn,
   .clan-mode-btn,
