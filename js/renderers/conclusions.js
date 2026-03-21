@@ -1,4 +1,4 @@
-export function renderConclusionsSection({ principles, myths, roadmap, sources }) {
+export function renderConclusionsSection({ principles, myths, roadmap, sources, summaryPoints }) {
   let html = "";
   html += `<div class="concl-hero">
     <div class="concl-hero-title">Одно предложение которое объясняет всё</div>
@@ -65,6 +65,19 @@ export function renderConclusionsSection({ principles, myths, roadmap, sources }
     </div>`;
   });
   html += `</div></div>`;
+  if (summaryPoints && summaryPoints.length) {
+    html += `<div class="econ-section">
+    <div class="econ-section-title concl-section-heading"><span>🔍</span> Разбор типовых ситуаций — как применять эти знания</div>
+    <div class="concl-summary-grid">`;
+    summaryPoints.forEach((sp) => {
+      html += `<div class="concl-summary-card">
+        <div class="concl-summary-num">${sp.n}</div>
+        <div class="concl-summary-title">${sp.title}</div>
+        <div class="concl-summary-text">${sp.text}</div>
+      </div>`;
+    });
+    html += `</div></div>`;
+  }
   html += `<div class="econ-section">
     <div class="econ-section-title concl-section-heading"><span>📚</span> Углублённое изучение — что читать дальше</div>
     <div class="concl-sources-grid">`;
