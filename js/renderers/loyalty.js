@@ -210,7 +210,7 @@ export function renderLoyaltySection({ mode, selMech, mechs, roles, cases }) {
     <div class="hier-header">
       <div>
         <div class="section-title flow-section-title">Механизмы лояльности — как система удерживает людей</div>
-        <div class="hier-subtitle">Не страх, а структура стимулов из которой невозможно выйти</div>
+        <div class="hier-subtitle">После февраля 2022-го Россию покинули сотни тысяч человек. Но миллионы образованных, думающих людей остались — и продолжают работать в системе. Здесь показано почему это рациональное решение, а не трусость.</div>
       </div>
       <div class="trap-mode-wrap">
         <button class="mech-mode-btn${mode === "trap" ? " active" : ""}" data-mode="trap">Ловушка</button>

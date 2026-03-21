@@ -9,6 +9,14 @@
   text-transform: uppercase;
   margin-bottom: var(--sp-lg);
 }
+.section-hook {
+  font-size: var(--fs-sm);
+  color: var(--text2);
+  line-height: var(--lh-base, var(--lh-normal));
+  margin-top: calc(var(--sp-xs) * -1);
+  margin-bottom: var(--sp-md);
+  max-width: 640px;
+}
 
 /* Shared filter pills */
 .tl-filter,

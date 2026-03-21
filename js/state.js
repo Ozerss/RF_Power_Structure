@@ -9,6 +9,7 @@ const DATA_URLS = Object.freeze({
   propaganda: new URL("../data/propaganda.json", import.meta.url),
   transit: new URL("../data/transit.json", import.meta.url),
   conclusions: new URL("../data/conclusions.json", import.meta.url),
+  regimes: new URL("../data/regimes.json", import.meta.url),
 });
 
 async function loadJson(url) {

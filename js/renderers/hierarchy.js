@@ -182,7 +182,7 @@ export function renderHierarchySection(data) {
     <div class="hier-header">
       <div>
         <div class="section-title hier-section-title">Карта реального влияния — 2026</div>
-        <div class="hier-subtitle">Близость к центру = реальная власть, не формальный титул</div>
+        <div class="hier-subtitle">Медведев был президентом — и принимал меньше решений чем Путин-премьер. Формальная должность и реальная власть — разные вещи. Здесь показано второе.</div>
       </div>
       <div class="hier-toggle">
         <button class="hier-toggle-btn active" id="btn-rings">Кольца влияния</button>

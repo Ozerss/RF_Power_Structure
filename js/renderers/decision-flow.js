@@ -108,7 +108,7 @@ export function renderDecisionFlowSection({ mode, stepIdx, downSteps, upSteps, c
     <div class="flow-header">
       <div>
         <div class="section-title flow-section-title">Механика власти — как решения принимаются и исполняются</div>
-        <div class="flow-subtitle">Выбери режим просмотра</div>
+        <div class="flow-subtitle">Российская армия планировала взять Киев за 72 часа. Это не военный просчёт — это результат того, как информация движется внутри системы. Каждый уровень передаёт наверх то, что хотят услышать.</div>
       </div>
       <div class="flow-mode-toggle">
         <button class="flow-mode-btn${mode === "stepper" ? " active" : ""}" data-mode="stepper">Пошагово</button>

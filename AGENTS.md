@@ -33,21 +33,34 @@ Dev server config: `.claude/launch.json` (name: "Dev Server", port 8080).
 
 ## Completed work (do not repeat)
 
+### Phase 1: Architecture & design system (steps 1–6, CSS-only)
 1. **Structural refactor** — monolith split into data/styles/js modules. Verified, no critical defects.
 2. **Design audit** — identified inconsistencies in typography, spacing, section titles, mode buttons.
-3. **Typographic scale** — `--fs-xs` through `--fs-2xl` CSS variables in `base.css`. Applied across CSS files.
-4. **Spacing scale** — `--sp-xs` through `--sp-3xl` CSS variables in `base.css`. Applied across CSS files.
+3. **Typographic scale** — `--fs-xs` through `--fs-2xl` CSS variables in `base.css`.
+4. **Spacing scale** — `--sp-xs` through `--sp-3xl` CSS variables in `base.css`.
 5. **Section title unification** — single `.section-title` class in `components.css`.
 6. **Mode button unification** — all toggle/mode buttons share base styles in `components.css`.
-7. **Mobile adaptation pass** — comprehensive `@media (max-width: 640px)` rules in layout.css, components.css, sections.css. Target: 375px. 19+ new rule blocks.
-8. **Dark/light theme toggle** — `[data-theme="light"]` block in `base.css` with full color variable overrides. Toggle button `#theme-toggle` in header. `js/theme.js` module handles switching + localStorage persistence. FOUC-prevention inline script in `<head>`.
-9. **Inline styles extraction** — 240→86 `style=` across all 10 renderers. All remaining 86 are data-driven (dynamic colors, positions, widths). Zero hardcoded hex/rgba left in renderers. ~70 new CSS classes added to `sections.css`.
 
-10. **SVG theme-aware** — verified visually: SVG diagrams already respond correctly to both themes after inline styles extraction. Structural colors use `var(--*)`, accent colors are data-driven and work on both backgrounds. No additional changes needed.
-11. **Card shell unification** — two stat card families (`.hier-stat` + `.econ-stat`) merged into single `.stat-grid / .stat-card / .stat-num / .stat-label / .stat-sub` family. All 8 renderers updated. Old classes removed.
-12. **Dead CSS cleanup** — 61 legacy `.tl-*` class names (99 selector lines) removed from `sections.css`. Timeline uses only `.tl3-*` classes. `#tl-main-container` preserved.
+### Phase 2: Visual polish & theme (steps 7–12, CSS + JS renderers + HTML)
+7. **Mobile adaptation pass** — comprehensive `@media (max-width: 640px)` rules. Target: 375px.
+8. **Dark/light theme toggle** — `[data-theme="light"]` in `base.css`. Toggle button `#theme-toggle`. `js/theme.js` + localStorage. FOUC-prevention script in `<head>`.
+9. **Inline styles extraction** — 240→86 `style=` across all 10 renderers. Zero hardcoded hex/rgba. ~70 new CSS classes in `sections.css`.
+10. **SVG theme-aware** — structural colors use `var(--*)`. No additional changes needed.
+11. **Card shell unification** — `.stat-grid / .stat-card / .stat-num / .stat-label / .stat-sub` family. 8 renderers updated.
+12. **Dead CSS cleanup** — 61 legacy `.tl-*` class names removed from `sections.css`.
 
-Steps 1–6: CSS-only. Steps 7–12: CSS + JS renderers + minimal HTML (theme toggle).
+### Phase 3: SEO, UX, Accessibility (steps 13–16)
+13. **SEO meta tags** — Open Graph, Twitter Card, description, canonical URL in `index.html`.
+14. **UX: close buttons + debounce** — `.detail-close` button on 4 detail panels (hierarchy, clans, mechanisms, timeline). `debounce(200)` on persons search.
+15. **Accessibility Batch A** — semantic HTML (`<nav>`, `<main>`), ARIA on tab system (`role="tablist/tab/tabpanel"`, `aria-selected`, `aria-controls`), `aria-live="polite"` on 4 detail panels, `:focus-visible` styles, skip link.
+16. **Accessibility Batch B** — keyboard nav: Arrow/Home/End on tabs, Enter/Space on SVG nodes (hierarchy, clans, mechanisms) and expandable cards (clans, mechanisms, timeline). `tabindex="0"`, `role="button"`, `aria-expanded` on 106 elements.
+
+### Phase 4: Content updates (steps 17–20)
+17. **Data fix: Kirienko traj** — `"up"` → `"unclear"` in `persons.json`. Dyumin removed from Technocrats clan in `clans.json`.
+18. **New persons** — Manturov, Tikhonova, D. Patrushev, Sobyanin added to `persons.json`. Sobyanin added to `transit.json` nextGen.
+19. **Economics update** — 2 stats replaced (−24% oil revenues, 16% key rate), 2 new cards added ("Russia in numbers", "Economic constraints of transit"), bodies of "Offshore architecture" and "War economy" rewritten with 2025–2026 data.
+20. **Timeline update** — 2 events replaced + 2 new events for 2025 (Riyadh talks, partial ceasefire, economic turning point, election reshuffling).
+21. **Conclusions update** — `summaryPoints` rewritten (6→8 items), new render block + CSS added for "Разбор типовых ситуаций".
 
 ## Theme system
 
@@ -79,23 +92,19 @@ Layout/header classes from inline styles extraction:
 ## Known technical debt (do not fix unless explicitly requested)
 
 - **86 data-driven inline styles** — remaining `style=` in renderers use dynamic values from data (`${color}`, `${bg}`, `width:${pct}%`). Cannot be extracted to CSS. They don't respond to theme toggle — this is known and accepted.
-- **No accessibility** — no ARIA roles, keyboard nav, focus styles.
 
 ## Current state
 
-All major technical cleanup is complete. The project is in a stable, maintainable state:
+Project is stable and feature-complete. Active phase: content enrichment and editorial polish.
 - Modular architecture (data/styles/js split)
 - Unified design tokens (typography, spacing, colors)
 - Responsive (mobile 375px)
-- Dark/light theme
+- Dark/light theme with FOUC prevention
 - Clean CSS (no dead code, unified card patterns, no hardcoded colors)
+- Full accessibility: ARIA, keyboard nav (tabs, SVG nodes, cards), focus-visible, skip link
 - 86 inline styles remaining (all data-driven, by design)
-
-Possible future directions (not started):
-- Content updates in `data/*.json`
-- Accessibility pass (ARIA, keyboard nav, focus styles)
-- Performance optimization
-- New sections or features
+- Content updated to 2025–2026 data across economics, timeline, persons, conclusions
+- 20 persons, 7 econ cards, 35 timeline events, 8 summary points
 
 ## Core rules
 

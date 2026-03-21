@@ -212,7 +212,7 @@ export function renderClansSection({ mode, selClan, C, BG, clans, relations, POS
     <div class="hier-header">
       <div>
         <div class="section-title flow-section-title">Кланы и сети — карта реального влияния 2026</div>
-        <div class="hier-subtitle">Не башни — патрон-клиентские сети пронизывающие все формальные категории</div>
+        <div class="hier-subtitle">Силовики, технократы и госкапиталисты постоянно конкурируют между собой. Но ни один не может победить другого без Путина. В этом и состоит его власть — не в должности, а в том что он единственный арбитр.</div>
       </div>
       <div class="clan-mode-toggle">
         <button class="clan-mode-btn${mode === "net" ? " active" : ""}" data-mode="net">Паутина власти</button>

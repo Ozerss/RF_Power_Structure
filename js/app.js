@@ -11,6 +11,7 @@ import { initEconomics } from "./features/economics.js";
 import { initPropaganda } from "./features/propaganda.js";
 import { initTransit } from "./features/transit.js";
 import { initConclusions } from "./features/conclusions.js";
+import { initRegimes } from "./features/regimes.js";
 
 const data = await loadAppData();
 const state = createAppState(data);
@@ -26,4 +27,5 @@ initEconomics(data.economics);
 initPropaganda(data.propaganda);
 initTransit(data.transit);
 initConclusions(data.conclusions);
+initRegimes(data.regimes);
 initTheme();

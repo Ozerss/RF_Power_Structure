@@ -126,7 +126,7 @@ export function renderTimelineSection({ mode, selIdx, activeCat, openCards, CATS
     <div class="hier-header">
       <div>
         <div class="section-title flow-section-title">Хронология — 1999–2025</div>
-        <div class="hier-subtitle">Как Путин уничтожал противовесы: 33 события за 27 лет</div>
+        <div class="hier-subtitle">В 2000-м — независимое ТВ. В 2003-м — независимый бизнес. В 2012-м — гражданское общество. В 2022-м — последние независимые СМИ. Каждый шаг выглядел как реакция на обстоятельства. Совпадение или система — смотрите сами.</div>
       </div>
       <div class="tl3-mode-row tl3-mode-row--flush">
         <button class="tl3-mode-btn${mode === "rail" ? " active" : ""}" data-m="rail">Рельс времени</button>

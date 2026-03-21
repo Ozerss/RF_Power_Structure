@@ -47,6 +47,7 @@
   <div class="tab" data-tab="propaganda" role="tab" id="tab-propaganda" tabindex="-1" aria-selected="false" aria-controls="panel-propaganda">Пропаганда</div>
   <div class="tab" data-tab="transit" role="tab" id="tab-transit" tabindex="-1" aria-selected="false" aria-controls="panel-transit">Транзит власти</div>
   <div class="tab" data-tab="conclusions" role="tab" id="tab-conclusions" tabindex="-1" aria-selected="false" aria-controls="panel-conclusions">Выводы</div>
+  <div class="tab" data-tab="regimes" role="tab" id="tab-regimes" tabindex="-1" aria-selected="false" aria-controls="panel-regimes">Сравнение режимов</div>
 </nav>
 
 <main id="main-content">
@@ -78,6 +79,7 @@
   <!-- PERSONS -->
   <div class="panel" id="panel-persons" role="tabpanel" aria-labelledby="tab-persons">
     <div class="section-title">Ключевые фигуры системы — 2025/2026</div>
+    <div class="section-hook">Формально второй человек государства — фактически маргинал. Формально «помощник президента» — фактически теневой вице-премьер. Должность в России почти ничего не говорит о реальном влиянии.</div>
     <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px" id="ps-filters"></div>
     <div style="margin-bottom:1.25rem">
       <input id="ps-search" type="text" placeholder="Поиск по имени или роли..." style="width:100%;max-width:380px;padding:8px 12px;background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--r);color:var(--text);font-size:13px">
@@ -88,25 +90,36 @@
   <!-- ECONOMICS -->
   <div class="panel" id="panel-economics" role="tabpanel" aria-labelledby="tab-economics">
     <div class="section-title">Экономика власти — как деньги движутся через систему</div>
+    <div class="section-hook">58% национального богатства России — у 1% населения. Это один из самых высоких показателей концентрации в мире: выше чем в США, выше чем в Китае. Credit Suisse, 2023.</div>
     <div id="econ-content"></div>
   </div>
 
   <!-- PROPAGANDA -->
   <div class="panel" id="panel-propaganda" role="tabpanel" aria-labelledby="tab-propaganda">
     <div class="section-title">Архитектура пропаганды — от Кремля до зрителя</div>
+    <div class="section-hook">Государственное ТВ в России смотрят 140 миллионов человек ежедневно. Задача — не убедить вас в чём-то конкретном, а создать столько противоречивых версий реальности, чтобы вы перестали доверять любой информации вообще. Это называется производство апатии.</div>
     <div id="prop-content"></div>
   </div>
 
   <!-- TRANSIT -->
   <div class="panel" id="panel-transit" role="tabpanel" aria-labelledby="tab-transit">
     <div class="section-title">Транзит власти — сценарии, триггеры, индикаторы</div>
+    <div class="section-hook">Путин не назвал преемника за 25 лет — намеренно. Пока никто не знает кто следующий, все зависят от него. Неопределённость и есть инструмент власти.</div>
     <div id="transit-content"></div>
   </div>
 
   <!-- CONCLUSIONS -->
   <div class="panel" id="panel-conclusions" role="tabpanel" aria-labelledby="tab-conclusions">
     <div class="section-title">Итоговый анализ — всё что важно понять и помнить</div>
+    <div class="section-hook">Убери Путина — получишь другого Путина. Система производит поведение, а не наоборот. Это отправная точка для понимания что именно нужно менять.</div>
     <div id="conclusions-content"></div>
+  </div>
+
+  <!-- REGIMES -->
+  <div class="panel" id="panel-regimes" role="tabpanel" aria-labelledby="tab-regimes">
+    <div class="section-title">Сравнительный анализ режимов — Россия, Китай, Сингапур, Турция</div>
+    <div class="section-hook">«Китай тоже авторитаризм» — самое распространённое возражение. Здесь показано в чём принципиальная разница.</div>
+    <div id="regimes-container"></div>
   </div>
 </main>
 
