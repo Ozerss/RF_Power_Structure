@@ -1,4 +1,4 @@
-export function renderConclusionsSection({ principles, myths, roadmap, sources, summaryPoints }) {
+export function renderConclusionsSection({ principles, myths, roadmap, sources, summaryPoints, limitations }) {
   let html = "";
   html += `<div class="concl-hero">
     <div class="concl-hero-title">Одно предложение которое объясняет всё</div>
@@ -82,6 +82,20 @@ export function renderConclusionsSection({ principles, myths, roadmap, sources, 
         <div class="concl-summary-num">${sp.n}</div>
         <div class="concl-summary-title">${sp.title}</div>
         <div class="concl-summary-text">${sp.text}</div>
+      </div>`;
+    });
+    html += `</div></div>`;
+  }
+  if (limitations && limitations.length) {
+    html += `<div class="econ-section">
+    <div class="econ-section-title concl-section-heading"><span>⚠️</span> Ограничения этого анализа</div>
+    <div class="concl-limitations-intro">Любой анализ — это выбор: что включить, как интерпретировать, что считать важным. Ниже — то, чего этот проект не делает или делает недостаточно хорошо. Знать об этом полезнее, чем не знать.</div>
+    <div class="concl-limitations-grid">`;
+    limitations.forEach((lim, i) => {
+      html += `<div class="concl-limitation-card">
+        <div class="concl-limitation-num">${i + 1}</div>
+        <div class="concl-limitation-title">${lim.title}</div>
+        <div class="concl-limitation-body">${lim.body}</div>
       </div>`;
     });
     html += `</div></div>`;
