@@ -255,7 +255,6 @@
   .concl-hero { background: linear-gradient(135deg, rgba(212,145,58,0.08) 0%, rgba(201,79,58,0.06) 100%); border: 0.5px solid rgba(212,145,58,0.3); border-radius: var(--r2); padding: 1.75rem; margin-bottom: 1.5rem; }
   .concl-hero-title { font-size: 18px; font-weight: 500; color: var(--amber); margin-bottom: 10px; line-height: 1.35; }
   .concl-hero-body { font-size: var(--fs-md); color: var(--text2); line-height: var(--lh-loose); }
-  .concl-section-heading { font-size: var(--fs-xl); font-weight: var(--fw-medium); margin-bottom: 1rem; display: flex; align-items: center; gap: var(--sp-sm); }
   .concl-principles { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px; margin-bottom: 1.5rem; }
   .concl-principle { background: var(--bg2); border: 0.5px solid var(--border); border-radius: var(--r2); padding: 16px; }
   .concl-principle-num { font-size: 32px; font-weight: 700; opacity: 0.07; float: right; line-height: 1; margin-left: 8px; }
@@ -574,7 +573,13 @@
   .hier-section-title { margin-bottom:6px; }
   .flow-section-title { margin-bottom:4px; }
   .hier-subtitle,
-  .flow-subtitle { font-size:var(--fs-sm); color:var(--text3); }
+  .flow-subtitle {
+    font-size: var(--fs-sm);
+    color: var(--text2);
+    line-height: var(--lh-normal);
+    margin-bottom: var(--sp-md);
+    max-width: 640px;
+  }
   .hier-svg-wrap svg { max-width:680px; }
   .hier-zone-fill { stroke:none; }
   .hier-zone-fill--0 { fill:var(--amber); opacity:0.06; }
